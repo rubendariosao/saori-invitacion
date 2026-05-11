@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saori - Mi Primer Añito Real</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Great+Vibes&family=Montserrat:wght@300;500&display=swap');
+
+        :root {
+            --royal-blue: #0d47a1;
+            --ice-glitter: #e1f5fe;
+            --snow-white: #ffffff;
+        }
+
+        body, html {
+            margin: 0; padding: 0;
+            font-family: 'Montserrat', sans-serif;
+            background: #b3e5fc;
+            background-image: radial-gradient(circle at center, #ffffff 0%, #81d4fa 100%);
+            overflow-x: hidden;
+            color: var(--royal-blue);
+        }
+
+        /* Nieve en los laterales */
+        #snow-canvas {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1; pointer-events: none;
+        }
+
+        .container {
+            position: relative; z-index: 10;
+            max-width: 450px; margin: 30px auto;
+            padding: 15px;
+        }
+
+        .ice-castle-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border: 3px solid var(--snow-white);
+            border-radius: 60px 60px 20px 20px;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(2, 119, 189, 0.2);
+        }
+
+        .crown-icon { font-size: 2.5rem; margin-bottom: 10px; display: block; }
+
+        h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4.5rem; margin: 0;
+            color: #0288d1;
+            text-shadow: 2px 2px 0px white;
+        }
+
+        .event-label {
+            font-family: 'Cinzel', serif;
+            letter-spacing: 4px; font-size: 0.8rem;
+            border-top: 1px solid #0288d1;
+            border-bottom: 1px solid #0288d1;
+            display: inline-block; padding: 5px 20px; margin: 15px 0;
+        }
+
+        .invitation-phrase {
+            font-style: italic; font-size: 1.1rem;
+            line-height: 1.6; margin: 20px 0;
+            color: #444; padding: 0 10px;
+        }
+
+        /* Galería con Marco de Hielo */
+        .ice-frame {
+            width: 100%; height: 380px;
+            margin: 30px 0;
+            border: 10px solid white;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            position: relative; overflow: hidden;
+        }
+
+        .ice-frame img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 1s ease-in-out, opacity 0.8s;
+        }
+
+        .photo-caption {
+            position: absolute; bottom: 0; width: 100%;
+            background: rgba(2, 136, 209, 0.7);
+            color: white; padding: 10px 0;
+            font-family: 'Cinzel', serif; font-size: 0.9rem;
+        }
+
+        .info-grid {
+            text-align: left; background: white;
+            border-radius: 20px; padding: 25px;
+            margin: 25px 0; border: 1px dashed #0288d1;
+        }
+
+        .info-item { margin-bottom: 15px; display: flex; align-items: center; }
+        .info-item span { font-size: 1.5rem; margin-right: 15px; }
+
+        .btn-confirm {
+            display: block; background: #0288d1; color: white;
+            text-decoration: none; padding: 20px; border-radius: 40px;
+            font-weight: bold; letter-spacing: 1px;
+            box-shadow: 0 8px 20px rgba(2, 136, 209, 0.4);
+            transition: 0.3s;
+        }
+
+        /* Botón de Música Flotante */
+        .music-control {
+            position: fixed; bottom: 20px; right: 20px;
+            background: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex;
+            justify-content: center; align-items: center;
+            cursor: pointer; z-index: 100;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="snow-canvas"></canvas>
+
+    <audio id="bgMusic" loop>
+        <source src="https://www.mboxdrive.com/frozen-musicbox.mp3" type="audio/mpeg">
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="music-control" onclick="toggleMusic()" id="musicBtn">🎵</div>
+
+    <div class="container">
+        <div class="ice-castle-card">
+            <span class="crown-icon">❄️</span>
+            <div class="event-label">MI PRIMER AÑITO</div>
+            <h1>Saori</h1>
+            
+            <p class="invitation-phrase">
+                "El tiempo vuela y una aventura congelada está por comenzar. Saori cumple su primer añito y queremos que seas parte de este reino de felicidad."
+            </p>
+
+            <div class="ice-frame">
+                <img id="gallery-img" src="imagen 1.webp">
+                <div class="photo-caption" id="gallery-label">MES 1</div>
+            </div>
+
+            <div class="info-grid">
+                <div class="info-item"><span>📍</span> <div><strong>Lugar:</strong> Playas, frente al Hotel Las Redes</div></div>
+                <div class="info-item"><span>📅</span> <div><strong>Fecha:</strong> 13 de Junio de 2026</div></div>
+                <div class="info-item"><span>🕒</span> <div><strong>Hora:</strong> 15:00 hrs</div></div>
+                <div class="info-item"><span>👪</span> <div><strong>Padres:</strong> Michael Muñoz y Rubén Zambrano</div></div>
+            </div>
+
+            <a href="https://wa.me/593967220855?text=¡Confirmo%20mi%20asistencia%20al%20cumpleaños%20de%20Saori!" class="btn-confirm">
+                CONFIRMAR ASISTENCIA
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Animación de Nieve Lateral
+        const canvas = document.getElementById('snow-canvas');
+        const ctx = canvas.getContext('2d');
+        let snowflakes = [];
+
+        function initSnow() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            snowflakes = [];
+            for(let i=0; i<100; i++) {
+                snowflakes.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    r: Math.random() * 4 + 1,
+                    d: Math.random() * 1,
+                    side: (Math.random() < 0.2 || Math.random() > 0.8) // Concentrar en lados
+                });
+            }
+        }
+
+        function drawSnow() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "white";
+            ctx.beginPath();
+            for(let i=0; i<snowflakes.length; i++) {
+                let p = snowflakes[i];
+                ctx.moveTo(p.x, p.y);
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI*2, true);
+            }
+            ctx.fill();
+            updateSnow();
+        }
+
+        function updateSnow() {
+            for(let i=0; i<snowflakes.length; i++) {
+                let p = snowflakes[i];
+                p.y += Math.cos(p.d) + 1 + p.r/2;
+                if(p.y > canvas.height) {
+                    snowflakes[i] = {x: Math.random() * canvas.width, y: -10, r: p.r, d: p.d};
+                }
+            }
+        }
+
+        setInterval(drawSnow, 33);
+        window.addEventListener('resize', initSnow);
+        initSnow();
+
+        // Música
+        const music = document.getElementById('bgMusic');
+        const btn = document.getElementById('musicBtn');
+        function toggleMusic() {
+            if (music.paused) { music.play(); btn.innerText = "🔇"; }
+            else { music.pause(); btn.innerText = "🎵"; }
+        }
+
+        // Galería
+        const photos = [
+            {src: 'imagen 1.webp', label: 'MES 1'}, {src: 'imagen 2.webp', label: 'MES 2'},
+            {src: 'imagen 3.webp', label: 'MES 3'}, {src: 'imagen 4.webp', label: 'MES 4'},
+            {src: 'imagen 5.webp', label: 'MES 5'}, {src: 'imagen 6.webp', label: 'MES 6'},
+            {src: 'imagen 7.webp', label: 'MES 7'}, {src: 'imagen 8.webp', label: 'MES 8'},
+            {src: 'imagen 9.webp', label: 'MES 9'}, {src: 'imagen 10.webp', label: 'MES 10'},
+            {src: 'image_51b07c.png', label: '¡MI PRIMER AÑITO!'}
+        ];
+        let currentIdx = 0;
+        setInterval(() => {
+            currentIdx = (currentIdx + 1) % photos.length;
+            const img = document.getElementById('gallery-img');
+            img.style.opacity = 0;
+            setTimeout(() => {
+                img.src = photos[currentIdx].src;
+                document.getElementById('gallery-label').innerText = photos[currentIdx].label;
+                img.style.opacity = 1;
+            }, 800);
+        }, 4000);
+
+        // Activar música al primer clic
+        document.body.addEventListener('click', () => {
+            if(music.paused) { music.play(); btn.innerText = "🔇"; }
+        }, {once: true});
+    </script>
+</body>
+</html>
