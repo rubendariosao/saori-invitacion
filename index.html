@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Saori - Mi Primer Añito Real</title>
+    <title>Saori - Mi Primer Añito</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Great+Vibes&family=Montserrat:wght@300;500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Great+Vibes&family=Montserrat:wght@300;500&display=swap');
 
         :root {
             --royal-blue: #0d47a1;
-            --ice-glitter: #e1f5fe;
             --snow-white: #ffffff;
+            --frozen-blue: #0288d1;
         }
 
         body, html {
@@ -20,9 +20,9 @@
             background-image: radial-gradient(circle at center, #ffffff 0%, #81d4fa 100%);
             overflow-x: hidden;
             color: var(--royal-blue);
+            scroll-behavior: smooth;
         }
 
-        /* Nieve en los laterales */
         #snow-canvas {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             z-index: 1; pointer-events: none;
@@ -30,92 +30,109 @@
 
         .container {
             position: relative; z-index: 10;
-            max-width: 450px; margin: 30px auto;
+            max-width: 450px; margin: 0 auto;
             padding: 15px;
         }
 
-        .ice-castle-card {
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s ease-out;
+            margin-bottom: 35px;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .ice-card {
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(10px);
             border: 3px solid var(--snow-white);
-            border-radius: 60px 60px 20px 20px;
-            padding: 40px 20px;
+            border-radius: 30px;
+            padding: 35px 20px;
             text-align: center;
-            box-shadow: 0 20px 50px rgba(2, 119, 189, 0.2);
+            box-shadow: 0 20px 50px rgba(2, 119, 189, 0.15);
         }
 
-        .crown-icon { font-size: 2.5rem; margin-bottom: 10px; display: block; }
+        /* --- EFECTO DE MOVIMIENTO CONSTANTE --- */
+        @keyframes soft-pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
 
-        h1 {
-            font-family: 'Great Vibes', cursive;
-            font-size: 4.5rem; margin: 0;
-            color: #0288d1;
-            text-shadow: 2px 2px 0px white;
+        .pulse-attention {
+            animation: soft-pulse 3s infinite ease-in-out;
+        }
+
+        /* --- TÍTULOS --- */
+        .title-wrapper {
+            margin: 20px 0 10px 0;
+            padding: 10px 0;
+            width: 100%;
+        }
+
+        .title-wrapper::before, .title-wrapper::after {
+            content: "";
+            display: block;
+            width: 60%; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--frozen-blue), transparent);
+            margin: 0 auto;
         }
 
         .event-label {
             font-family: 'Cinzel', serif;
-            letter-spacing: 4px; font-size: 0.8rem;
-            border-top: 1px solid #0288d1;
-            border-bottom: 1px solid #0288d1;
-            display: inline-block; padding: 5px 20px; margin: 15px 0;
+            letter-spacing: 6px; font-size: 1.4rem; font-weight: 900;
+            color: var(--royal-blue);
+            text-shadow: 1px 1px 0px #fff;
+            text-transform: uppercase;
         }
 
-        .invitation-phrase {
-            font-style: italic; font-size: 1.1rem;
-            line-height: 1.6; margin: 20px 0;
-            color: #444; padding: 0 10px;
+        h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4.8rem; margin: 0;
+            color: var(--frozen-blue);
+            line-height: 1;
         }
 
-        /* Galería con Marco de Hielo */
+        /* --- CUENTA REGRESIVA --- */
+        .countdown-container { display: flex; justify-content: center; gap: 10px; margin-top: 20px; }
+        .countdown-box {
+            background: rgba(2, 136, 209, 0.1);
+            border: 1px solid var(--frozen-blue);
+            border-radius: 10px; padding: 10px; min-width: 60px;
+        }
+        .countdown-box span { display: block; font-weight: bold; font-size: 1.2rem; }
+
+        /* --- GALERÍA --- */
         .ice-frame {
-            width: 100%; height: 380px;
-            margin: 30px 0;
-            border: 10px solid white;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            position: relative; overflow: hidden;
+            width: 100%; height: 380px; margin: 20px 0;
+            border: 8px solid white; border-radius: 15px;
+            overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
+        .ice-frame img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.8s; }
 
-        .ice-frame img {
-            width: 100%; height: 100%; object-fit: cover;
-            transition: transform 1s ease-in-out, opacity 0.8s;
-        }
-
-        .photo-caption {
-            position: absolute; bottom: 0; width: 100%;
-            background: rgba(2, 136, 209, 0.7);
-            color: white; padding: 10px 0;
-            font-family: 'Cinzel', serif; font-size: 0.9rem;
-        }
-
-        .info-grid {
-            text-align: left; background: white;
-            border-radius: 20px; padding: 25px;
-            margin: 25px 0; border: 1px dashed #0288d1;
-        }
-
-        .info-item { margin-bottom: 15px; display: flex; align-items: center; }
-        .info-item span { font-size: 1.5rem; margin-right: 15px; }
-
+        /* --- BOTONES Y MAPA --- */
+        .map-container { width: 100%; height: 230px; border-radius: 15px; overflow: hidden; border: 3px solid white; margin-bottom: 15px; }
+        
         .btn-confirm {
-            display: block; background: #0288d1; color: white;
-            text-decoration: none; padding: 20px; border-radius: 40px;
-            font-weight: bold; letter-spacing: 1px;
-            box-shadow: 0 8px 20px rgba(2, 136, 209, 0.4);
-            transition: 0.3s;
+            display: flex; align-items: center; justify-content: center;
+            background: var(--frozen-blue); color: white;
+            text-decoration: none; padding: 18px; border-radius: 40px;
+            font-weight: bold; width: 100%; box-sizing: border-box;
+            box-shadow: 0 8px 20px rgba(2, 136, 209, 0.3);
         }
 
-        /* Botón de Música Flotante */
-        .music-control {
-            position: fixed; bottom: 20px; right: 20px;
-            background: white; width: 50px; height: 50px;
-            border-radius: 50%; display: flex;
-            justify-content: center; align-items: center;
-            cursor: pointer; z-index: 100;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            font-size: 1.2rem;
+        /* --- CONTROLES FLOTANTES --- */
+        .controls { position: fixed; bottom: 20px; right: 20px; display: flex; flex-direction: column; gap: 10px; z-index: 100; }
+        .float-btn {
+            background: white; width: 45px; height: 45px; border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            cursor: pointer; border: 2px solid var(--frozen-blue);
         }
+        #scrollTopBtn { background: var(--frozen-blue); color: white; display: none; font-size: 1.5rem; }
     </style>
 </head>
 <body>
@@ -123,121 +140,108 @@
     <canvas id="snow-canvas"></canvas>
 
     <audio id="bgMusic" loop>
-        <source src="https://www.mboxdrive.com/frozen-musicbox.mp3" type="audio/mpeg">
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        <source src="https://cdn.pixabay.com/audio/2022/01/21/audio_3100650e89.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="magicSfx">
+        <source src="https://assets.mixkit.co/active_storage/sfx/2014/2014-preview.mp3" type="audio/mpeg">
     </audio>
 
-    <div class="music-control" onclick="toggleMusic()" id="musicBtn">🎵</div>
+    <div class="controls">
+        <button class="float-btn" id="scrollTopBtn" onclick="scrollToTop()">↑</button>
+        <button class="float-btn" onclick="toggleMusic()" id="musicBtn">🎵</button>
+    </div>
 
     <div class="container">
-        <div class="ice-castle-card">
-            <span class="crown-icon">❄️</span>
-            <div class="event-label">MI PRIMER AÑITO</div>
+        
+        <section class="reveal ice-card" style="margin-top: 30px;">
+            <span style="font-size: 2rem;">❄️</span>
+            <div class="title-wrapper"><span class="event-label">MI PRIMER AÑITO</span></div>
             <h1>Saori</h1>
-            
-            <p class="invitation-phrase">
-                "El tiempo vuela y una aventura congelada está por comenzar. Saori cumple su primer añito y queremos que seas parte de este reino de felicidad."
+            <p style="font-size: 0.9rem;">"El tiempo vuela y una aventura congelada está por comenzar."</p>
+            <div class="countdown-container">
+                <div class="countdown-box"><span id="days">00</span><small>Días</small></div>
+                <div class="countdown-box"><span id="hours">00</span><small>Horas</small></div>
+                <div class="countdown-box"><span id="minutes">00</span><small>Min</small></div>
+                <div class="countdown-box"><span id="seconds">00</span><small>Seg</small></div>
+            </div>
+        </section>
+
+        <section class="reveal ice-card">
+            <h2 style="font-family: 'Cinzel'; font-size: 1.1rem;">MIS MOMENTOS</h2>
+            <div class="ice-frame"><img id="gallery-img" src="imagen 1.webp"></div>
+        </section>
+
+        <section class="reveal ice-card">
+            <h2 style="font-family: 'Cinzel'; font-size: 1.1rem;">¿DÓNDE Y CUÁNDO?</h2>
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15948.334033704812!2d-80.3951717!3d-2.6300407!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x902d9337b311797d%3A0xc3f5869408696979!2sPlayas!5e0!3m2!1ses!2sec!4v1715450000000!5m2!1ses!2sec" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+            <p style="font-size: 0.85rem;"><strong>Lugar:</strong> Playas, frente al Hotel Las Redes</p>
+        </section>
+
+        <section class="reveal ice-card pulse-attention">
+            <span style="font-size: 2.5rem;">✉️</span>
+            <h2 style="font-family: 'Cinzel'; font-size: 1.1rem; color: var(--frozen-blue);">LLUVIA DE SOBRES</h2>
+            <p style="font-size: 0.9rem; line-height: 1.5; color: #444;">
+                "Tu presencia es nuestro mejor regalo, pero si deseas obsequiarle algo a la Sao, ella se pondrá muy feliz como una lombriz."
             </p>
+        </section>
 
-            <div class="ice-frame">
-                <img id="gallery-img" src="imagen 1.webp">
-                <div class="photo-caption" id="gallery-label">MES 1</div>
-            </div>
-
-            <div class="info-grid">
-                <div class="info-item"><span>📍</span> <div><strong>Lugar:</strong> Playas, frente al Hotel Las Redes</div></div>
-                <div class="info-item"><span>📅</span> <div><strong>Fecha:</strong> 13 de Junio de 2026</div></div>
-                <div class="info-item"><span>🕒</span> <div><strong>Hora:</strong> 15:00 hrs</div></div>
-                <div class="info-item"><span>👪</span> <div><strong>Padres:</strong> Michael Muñoz y Rubén Zambrano</div></div>
-            </div>
-
-            <a href="https://wa.me/593967220855?text=¡Confirmo%20mi%20asistencia%20al%20cumpleaños%20de%20Saori!" class="btn-confirm">
+        <section class="reveal pulse-attention" style="margin-bottom: 50px;">
+            <a href="https://wa.me/593967220855?text=¡Hola!%20Confirmo%20mi%20asistencia%20al%20cumpleaños%20de%20Saori" 
+               class="btn-confirm" onclick="playMagic()">
                 CONFIRMAR ASISTENCIA
             </a>
-        </div>
+        </section>
     </div>
 
     <script>
-        // Animación de Nieve Lateral
-        const canvas = document.getElementById('snow-canvas');
-        const ctx = canvas.getContext('2d');
-        let snowflakes = [];
+        function playMagic() { const sfx = document.getElementById('magicSfx'); sfx.currentTime = 0; sfx.play(); }
 
-        function initSnow() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            snowflakes = [];
-            for(let i=0; i<100; i++) {
-                snowflakes.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    r: Math.random() * 4 + 1,
-                    d: Math.random() * 1,
-                    side: (Math.random() < 0.2 || Math.random() > 0.8) // Concentrar en lados
-                });
-            }
-        }
-
-        function drawSnow() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = "white";
-            ctx.beginPath();
-            for(let i=0; i<snowflakes.length; i++) {
-                let p = snowflakes[i];
-                ctx.moveTo(p.x, p.y);
-                ctx.arc(p.x, p.y, p.r, 0, Math.PI*2, true);
-            }
-            ctx.fill();
-            updateSnow();
-        }
-
-        function updateSnow() {
-            for(let i=0; i<snowflakes.length; i++) {
-                let p = snowflakes[i];
-                p.y += Math.cos(p.d) + 1 + p.r/2;
-                if(p.y > canvas.height) {
-                    snowflakes[i] = {x: Math.random() * canvas.width, y: -10, r: p.r, d: p.d};
-                }
-            }
-        }
-
-        setInterval(drawSnow, 33);
-        window.addEventListener('resize', initSnow);
-        initSnow();
+        // Botón subir
+        const upBtn = document.getElementById("scrollTopBtn");
+        window.onscroll = () => { upBtn.style.display = (window.scrollY > 200) ? "flex" : "none"; };
+        function scrollToTop() { playMagic(); window.scrollTo({top: 0, behavior: 'smooth'}); }
 
         // Música
         const music = document.getElementById('bgMusic');
-        const btn = document.getElementById('musicBtn');
-        function toggleMusic() {
-            if (music.paused) { music.play(); btn.innerText = "🔇"; }
-            else { music.pause(); btn.innerText = "🎵"; }
+        const mBtn = document.getElementById('musicBtn');
+        function toggleMusic() { 
+            playMagic(); 
+            if (music.paused) { music.play(); mBtn.innerText = "🔇"; } 
+            else { music.pause(); mBtn.innerText = "🎵"; } 
         }
 
-        // Galería
-        const photos = [
-            {src: 'imagen 1.webp', label: 'MES 1'}, {src: 'imagen 2.webp', label: 'MES 2'},
-            {src: 'imagen 3.webp', label: 'MES 3'}, {src: 'imagen 4.webp', label: 'MES 4'},
-            {src: 'imagen 5.webp', label: 'MES 5'}, {src: 'imagen 6.webp', label: 'MES 6'},
-            {src: 'imagen 7.webp', label: 'MES 7'}, {src: 'imagen 8.webp', label: 'MES 8'},
-            {src: 'imagen 9.webp', label: 'MES 9'}, {src: 'imagen 10.webp', label: 'MES 10'},
-            {src: 'image_51b07c.png', label: '¡MI PRIMER AÑITO!'}
-        ];
-        let currentIdx = 0;
+        // Cuenta regresiva
+        const eventDate = new Date('June 13, 2026 15:00:00').getTime();
         setInterval(() => {
-            currentIdx = (currentIdx + 1) % photos.length;
-            const img = document.getElementById('gallery-img');
-            img.style.opacity = 0;
-            setTimeout(() => {
-                img.src = photos[currentIdx].src;
-                document.getElementById('gallery-label').innerText = photos[currentIdx].label;
-                img.style.opacity = 1;
-            }, 800);
-        }, 4000);
+            const diff = eventDate - new Date().getTime();
+            if (diff > 0) {
+                document.getElementById('days').innerText = Math.floor(diff / 86400000).toString().padStart(2, '0');
+                document.getElementById('hours').innerText = Math.floor((diff % 86400000) / 3600000).toString().padStart(2, '0');
+                document.getElementById('minutes').innerText = Math.floor((diff % 3600000) / 60000).toString().padStart(2, '0');
+                document.getElementById('seconds').innerText = Math.floor((diff % 60000) / 1000).toString().padStart(2, '0');
+            }
+        }, 1000);
 
-        // Activar música al primer clic
-        document.body.addEventListener('click', () => {
-            if(music.paused) { music.play(); btn.innerText = "🔇"; }
-        }, {once: true});
+        // Nieve
+        const canvas = document.getElementById('snow-canvas');
+        const ctx = canvas.getContext('2d');
+        let flakes = [];
+        function init() {
+            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+            flakes = Array.from({length: 50}, () => ({x: Math.random()*canvas.width, y: Math.random()*canvas.height, r: Math.random()*3+1}));
+        }
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height); ctx.fillStyle = "white"; ctx.beginPath();
+            flakes.forEach(f => { ctx.moveTo(f.x, f.y); ctx.arc(f.x, f.y, f.r, 0, Math.PI*2); f.y += 1; if(f.y > canvas.height) f.y = -10; });
+            ctx.fill(); requestAnimationFrame(draw);
+        }
+        init(); draw();
+
+        // Reveal
+        const observer = new IntersectionObserver(entries => { entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('active'); }); });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     </script>
 </body>
 </html>
