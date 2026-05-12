@@ -5,25 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Saori - Mi Primer Añito</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Great+Vibes&family=Montserrat:wght@300;500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Montserrat:wght@300;500;700&display=swap');
 
         :root {
-            --royal-blue: #0d47a1;
-            --snow-white: #ffffff;
-            --frozen-blue: #0288d1;
+            --stone-orange: #ffb74d;
+            --prehistoric-brown: #795548;
+            --dino-green: #aed581;
+            --bone-white: #f5f5f0;
+            --sky-blue: #81d4fa;
         }
 
         body, html {
             margin: 0; padding: 0;
             font-family: 'Montserrat', sans-serif;
-            background: #b3e5fc;
-            background-image: radial-gradient(circle at center, #ffffff 0%, #81d4fa 100%);
+            background: var(--bone-white);
+            background-image: radial-gradient(circle at center, #ffffff 0%, #ffe0b2 100%);
             overflow-x: hidden;
-            color: var(--royal-blue);
+            color: var(--prehistoric-brown);
             scroll-behavior: smooth;
         }
 
-        #snow-canvas {
+        #stone-canvas {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             z-index: 1; pointer-events: none;
         }
@@ -46,119 +48,220 @@
             transform: translateY(0);
         }
 
-        .ice-card {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(10px);
-            border: 3px solid var(--snow-white);
-            border-radius: 30px;
+        .stone-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(5px);
+            border: 4px solid var(--stone-orange);
+            border-radius: 40px 15px 40px 15px;
             padding: 35px 20px;
             text-align: center;
-            box-shadow: 0 20px 50px rgba(2, 119, 189, 0.15);
+            box-shadow: 8px 8px 0px rgba(121, 85, 72, 0.1);
         }
 
-        /* --- EFECTO DE MOVIMIENTO CONSTANTE --- */
-        @keyframes soft-pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.03); }
-            100% { transform: scale(1); }
+        /* --- NUEVA SECCIÓN BASADA EN LA IMAGEN (MAGIA) --- */
+        .magic-section {
+            text-align: left;
+            padding: 20px 10px;
         }
 
-        .pulse-attention {
-            animation: soft-pulse 3s infinite ease-in-out;
+        .magic-header {
+            border-bottom: 2px solid var(--stone-orange);
+            margin-bottom: 30px;
+            padding-bottom: 10px;
         }
 
-        /* --- TÍTULOS --- */
+        .magic-header h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            font-size: 1.8rem;
+            margin: 0;
+            color: #6d4c41; /* Marrón más suave como la imagen */
+        }
+
+        .magic-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .number-col {
+            text-align: center;
+        }
+
+        .big-number {
+            font-family: 'Luckiest Guy', cursive;
+            font-size: 8rem;
+            line-height: 1;
+            color: var(--stone-orange);
+            margin: 0;
+        }
+
+        .number-sub {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #6d4c41;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: -10px;
+            display: block;
+        }
+
+        .text-col h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--stone-orange);
+            margin: 0 0 15px 0;
+            font-size: 1.4rem;
+            font-weight: 500;
+        }
+
+        .text-col p {
+            font-size: 0.85rem;
+            line-height: 1.6;
+            margin: 0;
+            color: #555;
+            text-align: justify;
+        }
+        /* ------------------------------------------- */
+
         .title-wrapper {
             margin: 20px 0 10px 0;
             padding: 10px 0;
+            position: relative;
+            display: inline-block;
             width: 100%;
         }
 
-        .title-wrapper::before, .title-wrapper::after {
-            content: "";
+        .event-label {
+            font-family: 'Luckiest Guy', cursive;
+            letter-spacing: 2px; 
+            font-size: 1.6rem; 
+            color: var(--stone-orange);
+            text-shadow: 2px 2px 0px var(--prehistoric-brown);
+            text-transform: uppercase;
             display: block;
-            width: 60%; height: 1px;
-            background: linear-gradient(90deg, transparent, var(--frozen-blue), transparent);
-            margin: 0 auto;
         }
 
-        .event-label {
-            font-family: 'Cinzel', serif;
-            letter-spacing: 6px; font-size: 1.4rem; font-weight: 900;
-            color: var(--royal-blue);
-            text-shadow: 1px 1px 0px #fff;
-            text-transform: uppercase;
+        .countdown-container {
+            display: flex; justify-content: center; gap: 10px; margin-top: 20px;
         }
+        .countdown-box {
+            background: var(--stone-orange);
+            border: 2px solid var(--prehistoric-brown);
+            border-radius: 12px; padding: 10px; min-width: 60px;
+            color: white;
+        }
+        .countdown-box span { display: block; font-weight: bold; font-size: 1.2rem; font-family: 'Luckiest Guy'; }
+        .countdown-box small { font-size: 0.6rem; text-transform: uppercase; }
 
         h1 {
-            font-family: 'Great Vibes', cursive;
-            font-size: 4.8rem; margin: 0;
-            color: var(--frozen-blue);
-            line-height: 1;
+            font-family: 'Luckiest Guy', cursive;
+            font-size: 4.5rem;
+            margin: 0;
+            color: var(--prehistoric-brown);
+            line-height: 1.2;
+            filter: drop-shadow(3px 3px 0px var(--stone-orange));
         }
 
-        /* --- CUENTA REGRESIVA --- */
-        .countdown-container { display: flex; justify-content: center; gap: 10px; margin-top: 20px; }
-        .countdown-box {
-            background: rgba(2, 136, 209, 0.1);
-            border: 1px solid var(--frozen-blue);
-            border-radius: 10px; padding: 10px; min-width: 60px;
-        }
-        .countdown-box span { display: block; font-weight: bold; font-size: 1.2rem; }
-
-        /* --- GALERÍA --- */
-        .ice-frame {
+        .photo-frame {
             width: 100%; height: 380px; margin: 20px 0;
-            border: 8px solid white; border-radius: 15px;
-            overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border: 10px solid #d7ccc8; border-radius: 20px;
+            position: relative; overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            background: #eee;
         }
-        .ice-frame img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.8s; }
 
-        /* --- BOTONES Y MAPA --- */
-        .map-container { width: 100%; height: 230px; border-radius: 15px; overflow: hidden; border: 3px solid white; margin-bottom: 15px; }
-        
+        .photo-frame img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.8s; }
+
+        .photo-caption {
+            position: absolute; bottom: 0; width: 100%;
+            background: rgba(121, 85, 72, 0.9);
+            color: white; padding: 15px 10px;
+            font-family: 'Montserrat', sans-serif;
+            box-sizing: border-box;
+        }
+
+        .caption-title { font-family: 'Luckiest Guy'; font-size: 1rem; display: block; margin-bottom: 4px; color: var(--stone-orange); }
+        .caption-text { font-size: 0.75rem; font-style: italic; display: block; opacity: 0.9; }
+
+        .address-image {
+            width: 100%;
+            border-radius: 15px;
+            border: 4px solid var(--stone-orange);
+            margin-bottom: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .btn-maps {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--prehistoric-brown); color: white;
+            padding: 12px 25px; border-radius: 15px; text-decoration: none;
+            font-weight: bold; margin-bottom: 20px; font-size: 0.85rem;
+            width: 100%; box-sizing: border-box;
+            font-family: 'Luckiest Guy';
+        }
+
+        .info-grid {
+            text-align: left; background: #fff8e1; border-radius: 20px;
+            padding: 20px; margin-bottom: 20px; border: 2px dashed var(--stone-orange);
+        }
+
+        .info-item { margin-bottom: 12px; display: flex; align-items: center; font-size: 0.85rem; }
+        .info-item span { font-size: 1.5rem; margin-right: 12px; }
+
         .btn-confirm {
-            display: flex; align-items: center; justify-content: center;
-            background: var(--frozen-blue); color: white;
-            text-decoration: none; padding: 18px; border-radius: 40px;
-            font-weight: bold; width: 100%; box-sizing: border-box;
-            box-shadow: 0 8px 20px rgba(2, 136, 209, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--stone-orange); color: white;
+            text-decoration: none; padding: 18px; border-radius: 15px;
+            font-weight: bold; letter-spacing: 1px; 
+            box-shadow: 0 6px 0px var(--prehistoric-brown);
+            text-align: center; width: 100%; box-sizing: border-box;
+            font-family: 'Luckiest Guy'; font-size: 1.2rem;
         }
 
-        /* --- CONTROLES FLOTANTES --- */
+        .btn-confirm:active { transform: translateY(4px); box-shadow: 0 2px 0px var(--prehistoric-brown); }
+
         .controls { position: fixed; bottom: 20px; right: 20px; display: flex; flex-direction: column; gap: 10px; z-index: 100; }
         .float-btn {
             background: white; width: 45px; height: 45px; border-radius: 50%;
             display: flex; justify-content: center; align-items: center;
-            cursor: pointer; border: 2px solid var(--frozen-blue);
+            cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            border: 2px solid var(--stone-orange);
         }
-        #scrollTopBtn { background: var(--frozen-blue); color: white; display: none; font-size: 1.5rem; }
     </style>
 </head>
 <body>
 
-    <canvas id="snow-canvas"></canvas>
+    <canvas id="stone-canvas"></canvas>
 
     <audio id="bgMusic" loop>
-        <source src="https://cdn.pixabay.com/audio/2022/01/21/audio_3100650e89.mp3" type="audio/mpeg">
+        <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_82377c8052.mp3" type="audio/mpeg">
     </audio>
     <audio id="magicSfx">
         <source src="https://assets.mixkit.co/active_storage/sfx/2014/2014-preview.mp3" type="audio/mpeg">
     </audio>
 
     <div class="controls">
-        <button class="float-btn" id="scrollTopBtn" onclick="scrollToTop()">↑</button>
         <button class="float-btn" onclick="toggleMusic()" id="musicBtn">🎵</button>
     </div>
 
     <div class="container">
         
-        <section class="reveal ice-card" style="margin-top: 30px;">
-            <span style="font-size: 2rem;">❄️</span>
-            <div class="title-wrapper"><span class="event-label">MI PRIMER AÑITO</span></div>
+        <section class="reveal stone-card" style="margin-top: 30px;">
+            <span style="font-size: 2.5rem;">🦖</span>
+            <div class="title-wrapper">
+                <span class="event-label">¡YABBA DABBA DOO!</span>
+            </div>
             <h1>Saori</h1>
-            <p style="font-size: 0.9rem;">"El tiempo vuela y una aventura congelada está por comenzar. Saori cumple su primer añito y queremos que seas parte de este reino de felicidad."</p>
-            <div class="countdown-container">
+            <p style="font-size: 0.9rem; line-height: 1.6; font-weight: 500;">
+                "¡Nuestra pequeña Pebbles cumple su primer añito! Acompáñanos a celebrar en una fiesta de la edad de piedra que será histórica."
+            </p>
+            <div class="countdown-container" id="countdown">
                 <div class="countdown-box"><span id="days">00</span><small>Días</small></div>
                 <div class="countdown-box"><span id="hours">00</span><small>Horas</small></div>
                 <div class="countdown-box"><span id="minutes">00</span><small>Min</small></div>
@@ -166,29 +269,58 @@
             </div>
         </section>
 
-        <section class="reveal ice-card">
-            <h2 style="font-family: 'Cinzel'; font-size: 1.1rem;">MIS MOMENTOS</h2>
-            <div class="ice-frame"><img id="gallery-img" src="imagen 1.webp"></div>
-        </section>
-
-        <section class="reveal ice-card">
-            <h2 style="font-family: 'Cinzel'; font-size: 1.1rem;">¿DÓNDE Y CUÁNDO?</h2>
-            <div class="map-container">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15948.334033704812!2d-80.3951717!3d-2.6300407!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x902d9337b311797d%3A0xc3f5869408696979!2sPlayas!5e0!3m2!1ses!2sec!4v1715450000000!5m2!1ses!2sec" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        <section class="reveal magic-section">
+            <div class="magic-header">
+                <h2>Un Año de Pura Magia</h2>
             </div>
-            <p style="font-size: 0.85rem;"><strong>Lugar:</strong> Playas, frente al Hotel Las Redes</p>
+            <div class="magic-grid">
+                <div class="number-col">
+                    <p class="big-number">1</p>
+                    <span class="number-sub">Añito</span>
+                </div>
+                <div class="text-col">
+                    <h3>Haciendo Historia</h3>
+                    <p>
+                        365 días de descubrimientos, 52 semanas de sonrisas y 12 meses de amor incondicional. Saori ha crecido más rápido que un Brontosaurio y estamos listos para soplar su primera velita con todos ustedes.
+                    </p>
+                </div>
+            </div>
         </section>
 
-        <section class="reveal ice-card pulse-attention">
-            <span style="font-size: 2.5rem;">✉️</span>
-            <h2 style="font-family: 'Cinzel'; font-size: 1.1rem; color: var(--frozen-blue);">LLUVIA DE SOBRES</h2>
+        <section class="reveal stone-card">
+            <h2 style="font-family: 'Luckiest Guy'; font-size: 1.2rem; color: var(--prehistoric-brown);">ÁLBUM DE RECUERDOS</h2>
+            <div class="photo-frame" onclick="playMagic()">
+                <img id="gallery-img" src="principal.jpg">
+                <div class="photo-caption">
+                    <span class="caption-title" id="gallery-label">Llegada de la DinoSaori</span>
+                    <span class="caption-text" id="gallery-phrase">Llegaste a iluminar nuestro mundo.</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="reveal stone-card">
+            <h2 style="font-family: 'Luckiest Guy'; font-size: 1.2rem; color: var(--prehistoric-brown);">¿DÓNDE Y CUÁNDO?</h2>
+            <img src="direccion.png" alt="Mapa de la ubicación" class="address-image">
+            <a href="https://maps.app.goo.gl/..." target="_blank" class="btn-maps" onclick="playMagic()">
+                📍 ABRIR EN EL TRONCOMÓVIL
+            </a>        
+            <div class="info-grid">
+                <div class="info-item"><span>🏠</span> <div><strong>Lugar:</strong> Playas, frente al Hotel Las Redes</div></div>
+                <div class="info-item"><span>📅</span> <div><strong>Fecha:</strong> 13 de Junio de 2026</div></div>
+                <div class="info-item"><span>🕒</span> <div><strong>Hora:</strong> 15:00 hrs</div></div>
+            </div>
+        </section>
+
+        <section class="reveal stone-card">
+            <span style="font-size: 2.5rem;">🦴</span>
+            <h2 style="font-family: 'Luckiest Guy'; font-size: 1.2rem; color: var(--prehistoric-brown);">LLUVIA DE PIEDRAREGALOS</h2>
             <p style="font-size: 0.9rem; line-height: 1.5; color: #444;">
-                "Tu presencia es nuestro mejor regalo, pero si deseas obsequiarle algo a la Sao, ella se pondrá muy feliz como una lombriz."
+                "Tu presencia es nuestro mejor regalo, pero si deseas obsequiarle un piedraregalo a la Sao, ella se pondrá muy feliz como Dino."
             </p>
         </section>
 
-        <section class="reveal pulse-attention" style="margin-bottom: 50px;">
-            <a href="https://wa.me/593967220855?text=¡Hola!%20Confirmo%20mi%20asistencia%20al%20cumpleaños%20de%20Saori" 
+        <section class="reveal" style="margin-bottom: 50px;">
+            <a href="https://wa.me/593967220855?text=¡Yabba Dabba Doo! Confirmo mi asistencia al cumple de Saori" 
                class="btn-confirm" onclick="playMagic()">
                 CONFIRMAR ASISTENCIA
             </a>
@@ -196,52 +328,89 @@
     </div>
 
     <script>
-        function playMagic() { const sfx = document.getElementById('magicSfx'); sfx.currentTime = 0; sfx.play(); }
-
-        // Botón subir
-        const upBtn = document.getElementById("scrollTopBtn");
-        window.onscroll = () => { upBtn.style.display = (window.scrollY > 200) ? "flex" : "none"; };
-        function scrollToTop() { playMagic(); window.scrollTo({top: 0, behavior: 'smooth'}); }
-
-        // Música
-        const music = document.getElementById('bgMusic');
-        const mBtn = document.getElementById('musicBtn');
-        function toggleMusic() { 
-            playMagic(); 
-            if (music.paused) { music.play(); mBtn.innerText = "🔇"; } 
-            else { music.pause(); mBtn.innerText = "🎵"; } 
+        function playMagic() {
+            const sfx = document.getElementById('magicSfx');
+            sfx.currentTime = 0; sfx.play();
         }
 
-        // Cuenta regresiva
         const eventDate = new Date('June 13, 2026 15:00:00').getTime();
         setInterval(() => {
-            const diff = eventDate - new Date().getTime();
+            const now = new Date().getTime();
+            const diff = eventDate - now;
             if (diff > 0) {
-                document.getElementById('days').innerText = Math.floor(diff / 86400000).toString().padStart(2, '0');
-                document.getElementById('hours').innerText = Math.floor((diff % 86400000) / 3600000).toString().padStart(2, '0');
-                document.getElementById('minutes').innerText = Math.floor((diff % 3600000) / 60000).toString().padStart(2, '0');
-                document.getElementById('seconds').innerText = Math.floor((diff % 60000) / 1000).toString().padStart(2, '0');
+                document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+                document.getElementById('hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+                document.getElementById('minutes').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+                document.getElementById('seconds').innerText = Math.floor((diff % (1000 * 60)) / 1000).toString().padStart(2, '0');
             }
         }, 1000);
 
-        // Nieve
-        const canvas = document.getElementById('snow-canvas');
-        const ctx = canvas.getContext('2d');
-        let flakes = [];
-        function init() {
-            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-            flakes = Array.from({length: 50}, () => ({x: Math.random()*canvas.width, y: Math.random()*canvas.height, r: Math.random()*3+1}));
-        }
-        function draw() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height); ctx.fillStyle = "white"; ctx.beginPath();
-            flakes.forEach(f => { ctx.moveTo(f.x, f.y); ctx.arc(f.x, f.y, f.r, 0, Math.PI*2); f.y += 1; if(f.y > canvas.height) f.y = -10; });
-            ctx.fill(); requestAnimationFrame(draw);
-        }
-        init(); draw();
-
-        // Reveal
-        const observer = new IntersectionObserver(entries => { entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('active'); }); });
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+        }, { threshold: 0.1 });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        const music = document.getElementById('bgMusic');
+        const btn = document.getElementById('musicBtn');
+        function toggleMusic() {
+            if (music.paused) { music.play(); btn.innerText = "🔇"; }
+            else { music.pause(); btn.innerText = "🎵"; }
+        }
+
+        const canvas = document.getElementById('stone-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        function initStone() {
+            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+            particles = Array.from({length: 30}, () => ({
+                x: Math.random() * canvas.width, y: Math.random() * canvas.height,
+                r: Math.random() * 4 + 2, d: Math.random() * 0.5 + 0.2
+            }));
+        }
+        function drawStone() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "rgba(255, 183, 77, 0.2)"; 
+            ctx.beginPath();
+            for(let p of particles) {
+                ctx.moveTo(p.x, p.y); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2, true);
+                p.y -= p.d; if(p.y < -10) p.y = canvas.height + 10;
+            }
+            ctx.fill(); requestAnimationFrame(drawStone);
+        }
+        window.addEventListener('resize', initStone);
+        initStone(); drawStone();
+
+        const photos = [
+            {src: 'principal.jpg', label: '¡Yabba Dabba Doo!', phrase: '¡Bienvenidos a mi fiesta!'},
+            {src: '0 5 dias.jfif', label: '5 Días', phrase: 'Nuestra pequeña Sao - Pebbles.'}, 
+            {src: '1 mes.jfif', label: 'MES 1', phrase: 'Descubriendo Piedradura.'},
+            {src: '2 meses.jfif', label: 'MES 2', phrase: 'Dos meses descubriendo Piedradura.'},
+            {src: '3 meses.jfif', label: 'MES 3', phrase: 'Una sonrisa prehistórica.'},
+            {src: '4 meses.jfif', label: 'MES 4', phrase: 'Creciendo fuerte y valiente.'},
+            {src: '5 meses.jfif', label: 'MES 5', phrase: 'Cinco meses de pura alegría.'},
+            {src: '6 meses.jfif', label: 'MES 6', phrase: '¡Ya medio añito!'},
+            {src: '7 meses.jfif', label: 'MES 7', phrase: 'Explorando nuevos rincones.'},
+            {src: '8 meses.jfif', label: 'MES 8', phrase: 'Nuestra pequeña gran aventurera.'},
+            {src: '9 meses.jfif', label: 'MES 9', phrase: 'Tus risas son música para nosotros.'},
+            {src: '10 meses.jfif', label: 'MES 10', phrase: '¡Casi llegamos al gran día!'},
+            {src: '11 meses.jfif', label: 'MES 11', phrase: '¡Hoy la historia comienza!'}
+        ];
+        
+        let idx = 0;
+        setInterval(() => {
+            idx = (idx + 1) % photos.length;
+            const img = document.getElementById('gallery-img');
+            const label = document.getElementById('gallery-label');
+            const phrase = document.getElementById('gallery-phrase');
+            
+            img.style.opacity = 0;
+            setTimeout(() => {
+                img.src = photos[idx].src;
+                label.innerText = photos[idx].label;
+                phrase.innerText = photos[idx].phrase;
+                img.style.opacity = 1;
+            }, 800);
+        }, 4000);
     </script>
 </body>
 </html>
