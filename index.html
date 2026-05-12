@@ -25,14 +25,22 @@
             scroll-behavior: smooth;
         }
 
+        /* MODIFICACIÓN: z-index alto para estar sobre todo el contenido */
         #stone-canvas {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 1; pointer-events: none;
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%;
+            z-index: 999; 
+            pointer-events: none; /* Esto permite seguir haciendo clic en los botones debajo */
         }
 
         .container {
-            position: relative; z-index: 10;
-            max-width: 450px; margin: 0 auto;
+            position: relative; 
+            z-index: 10;
+            max-width: 450px; 
+            margin: 0 auto;
             padding: 15px;
         }
 
@@ -247,7 +255,6 @@
         .countdown-box {
             background: #fdfdfd;
             border: 3px solid #d7ccc8;
-            /* Forma irregular tipo hueso */
             border-radius: 40% 40% 45% 45% / 15% 15% 85% 85%;
             padding: 12px 5px; 
             min-width: 70px;
@@ -255,7 +262,6 @@
             box-shadow: inset -4px -4px 0px #e0e0e0, 4px 4px 0px rgba(0,0,0,0.1);
             position: relative;
         }
-        /* Círculos laterales para simular las puntas del hueso */
         .countdown-box::before, .countdown-box::after {
             content: '';
             position: absolute;
@@ -354,7 +360,7 @@
 
         .btn-confirm:active { transform: translateY(4px); box-shadow: 0 2px 0px var(--prehistoric-brown); }
 
-        .controls { position: fixed; bottom: 20px; right: 20px; display: flex; flex-direction: column; gap: 10px; z-index: 100; }
+        .controls { position: fixed; bottom: 20px; right: 20px; display: flex; flex-direction: column; gap: 10px; z-index: 1000; }
         .float-btn {
             background: white; width: 45px; height: 45px; border-radius: 50%;
             display: flex; justify-content: center; align-items: center;
@@ -365,6 +371,7 @@
 </head>
 <body>
 
+    <!-- Canvas modificado para estar encima de todo -->
     <canvas id="stone-canvas"></canvas>
 
     <audio id="bgMusic" loop>
@@ -532,18 +539,14 @@
         let particles = [];
         function initStone() {
             canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-            // Aumentado el número de partículas ligeramente y el rango de tamaño para más variabilidad
             particles = Array.from({length: 40}, () => ({
                 x: Math.random() * canvas.width, y: Math.random() * canvas.height,
-                // Rango de tamaño aumentado para más variabilidad (antes r: Math.random() * 4 + 2)
                 r: Math.random() * 5 + 3, 
-                // Velocidad ligeramente más rápida para mayor dinamismo
                 d: Math.random() * 0.7 + 0.3
             }));
         }
         function drawStone() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            // CAMBIO CLAVE: Aumentada la opacidad de 0.2 a 0.65 para que sean mucho más visibles
             ctx.fillStyle = "rgba(255, 183, 77, 0.65)"; 
             ctx.beginPath();
             for(let p of particles) {
