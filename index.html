@@ -58,7 +58,62 @@
             box-shadow: 8px 8px 0px rgba(121, 85, 72, 0.1);
         }
 
-        /* --- NUEVA SECCIÓN BASADA EN LA IMAGEN (MAGIA) --- */
+        /* --- SECCIÓN ¿QUÉ HABRÁ EN LA FIESTA? --- */
+        .party-features {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .party-features h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            font-size: 1.8rem;
+            color: #6d4c41;
+            margin-bottom: 10px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .party-features h2::after {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 2px;
+            background: var(--stone-orange);
+            margin-top: 5px;
+        }
+
+        .feature-item {
+            background: white;
+            border-radius: 25px;
+            padding: 30px 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            border-bottom: 5px solid var(--stone-orange);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--stone-orange);
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .feature-item h3 {
+            color: var(--stone-orange);
+            font-size: 1.5rem;
+            margin: 10px 0;
+            font-weight: 500;
+        }
+
+        .feature-item p {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        /* --- ESTILOS MAGIA --- */
         .magic-section {
             text-align: left;
             padding: 20px 10px;
@@ -75,7 +130,7 @@
             font-weight: 500;
             font-size: 1.8rem;
             margin: 0;
-            color: #6d4c41; /* Marrón más suave como la imagen */
+            color: #6d4c41;
         }
 
         .magic-grid {
@@ -123,7 +178,6 @@
             color: #555;
             text-align: justify;
         }
-        /* ------------------------------------------- */
 
         .title-wrapper {
             margin: 20px 0 10px 0;
@@ -284,6 +338,28 @@
                         365 días de descubrimientos, 52 semanas de sonrisas y 12 meses de amor incondicional. Saori ha crecido más rápido que un Brontosaurio y estamos listos para soplar su primera velita con todos ustedes.
                     </p>
                 </div>
+            </div>
+        </section>
+
+        <section class="reveal party-features">
+            <h2>¿Qué habrá en la Fiesta?</h2>
+            
+            <div class="feature-item">
+                <span class="feature-icon">🎂</span>
+                <h3>Banquete Real</h3>
+                <p>Deliciosos bocadillos de la edad de piedra y un pastel volcánico.</p>
+            </div>
+
+            <div class="feature-item">
+                <span class="feature-icon">🦴</span>
+                <h3>Dino Juegos</h3>
+                <p>Actividades divertidas inspiradas en Bam-Bam y Dino.</p>
+            </div>
+
+            <div class="feature-item">
+                <span class="feature-icon">🎁</span>
+                <h3>Sorpresas</h3>
+                <p>Regalos y recuerdos para todos nuestros pequeños trogloditas.</p>
             </div>
         </section>
 
