@@ -240,17 +240,48 @@
             display: block;
         }
 
+        /* MODIFICACIÓN DEL CONTADOR ESTILO HUESO */
         .countdown-container {
-            display: flex; justify-content: center; gap: 10px; margin-top: 20px;
+            display: flex; justify-content: center; gap: 8px; margin-top: 25px;
         }
         .countdown-box {
-            background: var(--stone-orange);
-            border: 2px solid var(--prehistoric-brown);
-            border-radius: 12px; padding: 10px; min-width: 60px;
-            color: white;
+            background: #fdfdfd;
+            border: 3px solid #d7ccc8;
+            /* Forma irregular tipo hueso */
+            border-radius: 40% 40% 45% 45% / 15% 15% 85% 85%;
+            padding: 12px 5px; 
+            min-width: 70px;
+            color: var(--prehistoric-brown);
+            box-shadow: inset -4px -4px 0px #e0e0e0, 4px 4px 0px rgba(0,0,0,0.1);
+            position: relative;
         }
-        .countdown-box span { display: block; font-weight: bold; font-size: 1.2rem; font-family: 'Luckiest Guy'; }
-        .countdown-box small { font-size: 0.6rem; text-transform: uppercase; }
+        /* Círculos laterales para simular las puntas del hueso */
+        .countdown-box::before, .countdown-box::after {
+            content: '';
+            position: absolute;
+            width: 15px; height: 15px;
+            background: #fdfdfd;
+            border: 3px solid #d7ccc8;
+            border-radius: 50%;
+            z-index: -1;
+        }
+        .countdown-box::before { top: -8px; left: 50%; transform: translateX(-110%); }
+        .countdown-box::after { top: -8px; left: 50%; transform: translateX(10%); }
+
+        .countdown-box span { 
+            display: block; 
+            font-weight: bold; 
+            font-size: 1.4rem; 
+            font-family: 'Luckiest Guy'; 
+            color: var(--prehistoric-brown);
+            text-shadow: none;
+        }
+        .countdown-box small { 
+            font-size: 0.65rem; 
+            text-transform: uppercase; 
+            font-weight: 700;
+            color: var(--stone-orange);
+        }
 
         h1 {
             font-family: 'Luckiest Guy', cursive;
