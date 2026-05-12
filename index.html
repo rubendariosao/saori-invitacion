@@ -58,7 +58,7 @@
             box-shadow: 8px 8px 0px rgba(121, 85, 72, 0.1);
         }
 
-        /* --- NUEVA SECCIÓN: REGLAS DE PIEDRADURA --- */
+        /* --- SECCIÓN: REGLAS DE PIEDRADURA --- */
         .rules-section {
             text-align: left;
             padding: 20px 10px;
@@ -240,7 +240,7 @@
             display: block;
         }
 
-        /* MODIFICACIÓN DEL CONTADOR ESTILO HUESO */
+        /* CONTADOR ESTILO HUESO */
         .countdown-container {
             display: flex; justify-content: center; gap: 8px; margin-top: 25px;
         }
@@ -532,14 +532,19 @@
         let particles = [];
         function initStone() {
             canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-            particles = Array.from({length: 30}, () => ({
+            // Aumentado el número de partículas ligeramente y el rango de tamaño para más variabilidad
+            particles = Array.from({length: 40}, () => ({
                 x: Math.random() * canvas.width, y: Math.random() * canvas.height,
-                r: Math.random() * 4 + 2, d: Math.random() * 0.5 + 0.2
+                // Rango de tamaño aumentado para más variabilidad (antes r: Math.random() * 4 + 2)
+                r: Math.random() * 5 + 3, 
+                // Velocidad ligeramente más rápida para mayor dinamismo
+                d: Math.random() * 0.7 + 0.3
             }));
         }
         function drawStone() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = "rgba(255, 183, 77, 0.2)"; 
+            // CAMBIO CLAVE: Aumentada la opacidad de 0.2 a 0.65 para que sean mucho más visibles
+            ctx.fillStyle = "rgba(255, 183, 77, 0.65)"; 
             ctx.beginPath();
             for(let p of particles) {
                 ctx.moveTo(p.x, p.y); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2, true);
