@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Saori - Mi Primer Añito</title>
+    <meta property="og:title" content="¡El Primer Añito de Saori!">
+    <meta property="og:description" content="Acompáñanos a una fiesta histórica en Piedradura. ¡Yabba Dabba Doo!">
+    <meta property="og:image" content="https://tudominio.com/principal.jpg">
+    <meta property="og:url" content="URL_DE_TU_INVITACION">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Montserrat:wght@300;500;700&display=swap');
 
@@ -21,7 +25,6 @@
             overflow-x: hidden;
             color: var(--prehistoric-brown);
             scroll-behavior: smooth;
-            /* Imagen de fondo por defecto (horizontal/PC) */
             background-image: url('principal.jpg');
             background-attachment: fixed;
             background-position: center;
@@ -29,24 +32,21 @@
             background-size: cover;
         }
 
-        /* MODIFICACIÓN: Imagen de fondo cuando la pantalla está en vertical */
         @media (orientation: portrait) {
             body, html {
                 background-image: url('vertical.jpg');
             }
         }
 
-        /* Capa de oscurecimiento opcional para mejorar legibilidad del texto sobre la imagen */
         body::before {
             content: "";
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background: rgba(255, 255, 255, 0.2); /* Ajusta el 0.2 si quieres que se vea más o menos clara la imagen */
+            background: rgba(255, 255, 255, 0.2);
             z-index: -2;
         }
 
-        /* MODIFICACIÓN: z-index ajustado para estar detrás del contenido pero sobre el fondo */
         #stone-canvas {
             position: fixed; 
             top: 0; 
@@ -87,7 +87,7 @@
             box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.2);
         }
 
-        /* --- SECCIÓN: REGLAS DE PIEDRADURA --- */
+        /* --- REGLAS --- */
         .rules-section {
             text-align: left;
             padding: 20px 25px;
@@ -133,23 +133,17 @@
             flex-shrink: 0;
         }
 
-        /* --- SECCIÓN ¿QUÉ HABRÁ EN LA FIESTA? --- */
-        .party-features {
-            text-align: center;
-            margin-top: 20px;
-        }
-
+        /* --- CARACTERÍSTICAS --- */
         .party-features h2 {
             font-family: 'Montserrat', sans-serif;
             font-weight: 500;
             font-size: 1.8rem;
             color: #6d4c41;
             margin-bottom: 10px;
-            position: relative;
-            display: inline-block;
             background: rgba(255, 255, 255, 0.8);
             padding: 5px 15px;
             border-radius: 10px;
+            display: inline-block;
         }
 
         .feature-item {
@@ -159,11 +153,11 @@
             margin-bottom: 20px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.05);
             border-bottom: 5px solid var(--stone-orange);
+            text-align: center;
         }
 
         .feature-icon {
             font-size: 3rem;
-            color: var(--stone-orange);
             margin-bottom: 15px;
             display: block;
         }
@@ -175,34 +169,12 @@
             font-weight: 500;
         }
 
-        .feature-item p {
-            font-size: 0.9rem;
-            color: #666;
-            line-height: 1.5;
-            margin: 0;
-        }
-
-        /* --- ESTILOS MAGIA --- */
+        /* --- MAGIA --- */
         .magic-section {
             text-align: left;
             padding: 20px 25px;
             background: rgba(255, 255, 255, 0.9);
             border-radius: 20px;
-            backdrop-filter: blur(5px);
-        }
-
-        .magic-header {
-            border-bottom: 2px solid var(--stone-orange);
-            margin-bottom: 30px;
-            padding-bottom: 10px;
-        }
-
-        .magic-header h2 {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 500;
-            font-size: 1.8rem;
-            margin: 0;
-            color: #6d4c41;
         }
 
         .magic-grid {
@@ -231,41 +203,7 @@
             display: block;
         }
 
-        .text-col h3 {
-            font-family: 'Montserrat', sans-serif;
-            color: var(--stone-orange);
-            margin: 0 0 15px 0;
-            font-size: 1.4rem;
-            font-weight: 500;
-        }
-
-        .text-col p {
-            font-size: 0.85rem;
-            line-height: 1.6;
-            margin: 0;
-            color: #555;
-            text-align: justify;
-        }
-
-        .title-wrapper {
-            margin: 20px 0 10px 0;
-            padding: 10px 0;
-            position: relative;
-            display: inline-block;
-            width: 100%;
-        }
-
-        .event-label {
-            font-family: 'Luckiest Guy', cursive;
-            letter-spacing: 2px; 
-            font-size: 1.6rem; 
-            color: var(--stone-orange);
-            text-shadow: 2px 2px 0px var(--prehistoric-brown);
-            text-transform: uppercase;
-            display: block;
-        }
-
-        /* CONTADOR */
+        /* --- CONTADOR --- */
         .countdown-container {
             display: flex; justify-content: center; gap: 8px; margin-top: 25px;
         }
@@ -275,30 +213,16 @@
             border-radius: 40% 40% 45% 45% / 15% 15% 85% 85%;
             padding: 12px 5px; 
             min-width: 70px;
-            color: var(--prehistoric-brown);
             box-shadow: inset -4px -4px 0px #e0e0e0, 4px 4px 0px rgba(0,0,0,0.1);
-            position: relative;
         }
+        .countdown-box span { display: block; font-weight: bold; font-size: 1.4rem; font-family: 'Luckiest Guy'; }
+        .countdown-box small { font-size: 0.65rem; text-transform: uppercase; color: var(--stone-orange); }
 
-        .countdown-box span { 
-            display: block; 
-            font-weight: bold; 
-            font-size: 1.4rem; 
-            font-family: 'Luckiest Guy'; 
-            color: var(--prehistoric-brown);
-        }
-        .countdown-box small { 
-            font-size: 0.65rem; 
-            text-transform: uppercase; 
-            font-weight: 700;
-            color: var(--stone-orange);
-        }
-
+        /* --- GALERÍA --- */
         h1 {
             font-family: 'Luckiest Guy', cursive;
             font-size: 4.5rem;
             margin: 0;
-            color: var(--prehistoric-brown);
             line-height: 1.2;
             filter: drop-shadow(3px 3px 0px var(--stone-orange));
         }
@@ -322,50 +246,36 @@
             position: absolute; bottom: 0; width: 100%;
             background: rgba(121, 85, 72, 0.9);
             color: white; padding: 15px 10px;
-            font-family: 'Montserrat', sans-serif;
             box-sizing: border-box;
         }
 
-        .caption-title { font-family: 'Luckiest Guy'; font-size: 1rem; display: block; margin-bottom: 4px; color: var(--stone-orange); }
-        .caption-text { font-size: 0.75rem; font-style: italic; display: block; opacity: 0.9; }
-
+        /* --- BOTONES Y OTROS --- */
         .address-image {
             width: 100%;
             border-radius: 15px;
             border: 4px solid var(--stone-orange);
             margin-bottom: 20px;
-            display: block;
         }
 
-        .btn-maps {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--prehistoric-brown); color: white;
-            padding: 12px 25px; border-radius: 15px; text-decoration: none;
-            font-weight: bold; margin-bottom: 20px; font-size: 0.85rem;
-            width: 100%; box-sizing: border-box;
-            font-family: 'Luckiest Guy';
-        }
-
-        .info-grid {
-            text-align: left; background: #fff8e1; border-radius: 20px;
-            padding: 20px; margin-bottom: 20px; border: 2px dashed var(--stone-orange);
-        }
-
-        .info-item { margin-bottom: 12px; display: flex; align-items: center; font-size: 0.85rem; }
-        .info-item span { font-size: 1.5rem; margin-right: 12px; }
-
-        .btn-confirm {
+        .btn-maps, .btn-confirm {
             display: flex;
             align-items: center;
             justify-content: center;
+            text-decoration: none;
+            border-radius: 15px;
+            font-family: 'Luckiest Guy';
+            transition: transform 0.2s;
+        }
+
+        .btn-maps {
+            background: var(--prehistoric-brown); color: white;
+            padding: 12px 25px; margin-bottom: 20px; font-size: 0.85rem;
+        }
+
+        .btn-confirm {
             background: var(--stone-orange); color: white;
-            text-decoration: none; padding: 18px; border-radius: 15px;
-            font-weight: bold; letter-spacing: 1px; 
+            padding: 18px; font-size: 1.2rem;
             box-shadow: 0 6px 0px var(--prehistoric-brown);
-            text-align: center; width: 100%; box-sizing: border-box;
-            font-family: 'Luckiest Guy'; font-size: 1.2rem;
         }
 
         .btn-confirm:active { transform: translateY(4px); box-shadow: 0 2px 0px var(--prehistoric-brown); }
@@ -374,9 +284,15 @@
         .float-btn {
             background: white; width: 45px; height: 45px; border-radius: 50%;
             display: flex; justify-content: center; align-items: center;
-            cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            border: 2px solid var(--stone-orange);
+            cursor: pointer; border: 2px solid var(--stone-orange);
         }
+
+        .info-grid {
+            text-align: left; background: #fff8e1; border-radius: 20px;
+            padding: 20px; margin-bottom: 20px; border: 2px dashed var(--stone-orange);
+        }
+        .info-item { margin-bottom: 12px; display: flex; align-items: center; font-size: 0.85rem; }
+        .info-item span { font-size: 1.5rem; margin-right: 12px; }
     </style>
 </head>
 <body>
@@ -396,13 +312,14 @@
 
     <div class="container">
         
+        <!-- Header / Intro -->
         <section class="reveal stone-card" style="margin-top: 30px;">
             <span style="font-size: 2.5rem;">🦖</span>
-            <div class="title-wrapper">
-                <span class="event-label">¡YABBA DABBA DOO!</span>
+            <div style="margin: 20px 0;">
+                <span style="font-family: 'Luckiest Guy'; font-size: 1.6rem; color: var(--stone-orange); text-shadow: 2px 2px 0px var(--prehistoric-brown);">¡YABBA DABBA DOO!</span>
             </div>
             <h1>Saori</h1>
-            <p style="font-size: 0.9rem; line-height: 1.6; font-weight: 600;">
+            <p style="font-weight: 600;">
                 "¡Nuestra pequeña Pebbles cumple su primer añito! Acompáñanos a celebrar en una fiesta de la edad de piedra que será histórica."
             </p>
             <div class="countdown-container" id="countdown">
@@ -413,50 +330,48 @@
             </div>
         </section>
 
+        <!-- Magia / 1 Añito -->
         <section class="reveal magic-section">
-            <div class="magic-header">
-                <h2>Un Año de Pura Magia</h2>
-            </div>
+            <div class="rules-header"><h2>Un Año de Pura Magia</h2></div>
             <div class="magic-grid">
-                <div class="number-col">
+                <div style="text-align: center;">
                     <p class="big-number">1</p>
                     <span class="number-sub">Añito</span>
                 </div>
-                <div class="text-col">
-                    <h3>Haciendo Historia</h3>
-                    <p>
-                        365 días de descubrimientos, 52 semanas de sonrisas y 12 meses de amor incondicional. Saori ha crecido más rápido que un Brontosaurio y estamos listos para soplar su primera velita con todos ustedes.
+                <div>
+                    <h3 style="color: var(--stone-orange);">Haciendo Historia</h3>
+                    <p style="font-size: 0.85rem; color: #555;">
+                        365 días de descubrimientos, 52 semanas de sonrisas y 12 meses de amor incondicional. Saori ha crecido más rápido que un Brontosaurio.
                     </p>
                 </div>
             </div>
         </section>
 
+        <!-- Galería de Fotos -->
         <section class="reveal stone-card">
-            <h2 style="font-family: 'Luckiest Guy'; font-size: 1.2rem; color: var(--prehistoric-brown);">ÁLBUM DE RECUERDOS</h2>
+            <h2 style="font-family: 'Luckiest Guy'; font-size: 1.2rem;">ÁLBUM DE RECUERDOS</h2>
             <div class="photo-frame" onclick="playMagic()">
                 <img id="gallery-img" src="principal.jpg">
                 <div class="photo-caption">
-                    <span class="caption-title" id="gallery-label">Llegada de la DinoSaori</span>
-                    <span class="caption-text" id="gallery-phrase">Llegaste a iluminar nuestro mundo.</span>
+                    <span id="gallery-label" style="font-family: 'Luckiest Guy'; color: var(--stone-orange);">Llegada de la DinoSaori</span>
+                    <span id="gallery-phrase" style="display: block; font-size: 0.75rem; font-style: italic; opacity: 0.9;">Llegaste a iluminar nuestro mundo.</span>
                 </div>
             </div>
         </section>
 
-        <section class="reveal party-features">
+        <!-- Que habrá -->
+        <section class="reveal party-features" style="text-align: center;">
             <h2>¿Qué habrá en la Fiesta?</h2>
-            
             <div class="feature-item">
                 <span class="feature-icon">🎂</span>
                 <h3>Piedra Banquete</h3>
                 <p>Deliciosos bocadillos de la edad de piedra y un pastel volcánico.</p>
             </div>
-
             <div class="feature-item">
                 <span class="feature-icon">🦴</span>
                 <h3>Dino Juegos</h3>
                 <p>Actividades divertidas inspiradas en Pebbles y Dino.</p>
             </div>
-
             <div class="feature-item">
                 <span class="feature-icon">🎁</span>
                 <h3>Sorpresas</h3>
@@ -464,39 +379,29 @@
             </div>
         </section>
 
+        <!-- Regalo -->
         <section class="reveal stone-card">
             <span style="font-size: 2.5rem;">🦴</span>
-            <h2 style="font-family: 'Luckiest Guy'; font-size: 1.2rem; color: var(--prehistoric-brown);">LLUVIA DE PIEDRAREGALOS</h2>
-            <p style="font-size: 0.9rem; line-height: 1.5; color: #444;">
+            <h2 style="font-family: 'Luckiest Guy'; font-size: 1.2rem;">LLUVIA DE PIEDRAREGALOS</h2>
+            <p style="font-size: 0.9rem;">
                 "Tu presencia es nuestro mejor regalo, pero si deseas obsequiarle un piedraregalo a la Sao, ella se pondrá muy feliz como Dino."
             </p>
         </section>
 
+        <!-- Reglas -->
         <section class="reveal rules-section">
-            <div class="rules-header">
-                <h2>Reglas de Piedradura</h2>
-            </div>
+            <div class="rules-header"><h2>Reglas de Piedradura</h2></div>
             <ul class="rules-list">
-                <li class="rule-item">
-                    <span class="rule-star">★</span> Traer tu sonrisa más grande y prehistórica.
-                </li>
-                <li class="rule-item">
-                    <span class="rule-star">★</span> Venir listo para bailar el "Rock de Piedradura".
-                </li>
-                <li class="rule-item">
-                    <span class="rule-star">★</span> Prohibido traer dinosaurios salvajes (Dino es la excepción).
-                </li>
-                <li class="rule-item">
-                    <span class="rule-star">★</span> ¡Disfrutar al máximo como si fuera el año 10,000 a.C.!
-                </li>
+                <li class="rule-item"><span class="rule-star">★</span> Traer tu sonrisa más grande y prehistórica.</li>
+                <li class="rule-item"><span class="rule-star">★</span> Venir listo para bailar el "Rock de Piedradura".</li>
+                <li class="rule-item"><span class="rule-star">★</span> Prohibido traer dinosaurios salvajes.</li>
             </ul>
         </section>
 
+        <!-- Ubicación -->
         <section class="reveal stone-card">
-            <h2 style="font-family: 'Luckiest Guy'; font-size: 1.2rem; color: var(--prehistoric-brown);">¿DÓNDE Y CUÁNDO?</h2>
-            
-            <img src="direccion.png" alt="Ubicación de la fiesta" class="address-image">
-
+            <h2 style="font-family: 'Luckiest Guy'; font-size: 1.2rem;">¿DÓNDE Y CUÁNDO?</h2>
+            <img src="direccion.png" alt="Ubicación" class="address-image">
             <div class="info-grid">
                 <div class="info-item"><span>🏠</span> <div><strong>Lugar:</strong> Playas, frente al Hotel Las Redes (puerta blanca).</div></div>
                 <div class="info-item"><span>📅</span> <div><strong>Fecha:</strong> 13 de Junio de 2026</div></div>
@@ -507,15 +412,16 @@
             </a>        
         </section>
 
+        <!-- Confirmación -->
         <section class="reveal" style="margin-bottom: 20px;">
-            <a href="https://wa.me/593994121550?text=¡Yabba Dabba Doo! Confirmo mi asistencia al cumple de Saori en Piedradura, iré en mi troncomóvil." 
+            <a href="https://wa.me/593994121550?text=¡Yabba Dabba Doo! Confirmo mi asistencia al cumple de Saori en Piedradura." 
                class="btn-confirm" onclick="playMagic()">
                 CONFIRMAR ASISTENCIA A LA MADRE
             </a>
         </section>
 
         <section class="reveal" style="margin-bottom: 50px;">
-            <a href="https://wa.me/593967220855?text=¡Yabba Dabba Doo! Confirmo mi asistencia al cumple de Saori en Piedradura, iré en mi troncomóvil." 
+            <a href="https://wa.me/593967220855?text=¡Yabba Dabba Doo! Confirmo mi asistencia al cumple de Saori en Piedradura." 
                class="btn-confirm" onclick="playMagic()" style="background-color: #81d4fa; box-shadow: 0 6px 0px #0288d1;">
                 CONFIRMAR ASISTENCIA AL PADRE
             </a>
@@ -528,7 +434,8 @@
             sfx.currentTime = 0; sfx.play();
         }
 
-        const eventDate = new Date('June 13, 2026 15:00:00').getTime();
+        // Contador
+        const eventDate = new Date('June 13, 2026 14:00:00').getTime();
         setInterval(() => {
             const now = new Date().getTime();
             const diff = eventDate - now;
@@ -540,11 +447,13 @@
             }
         }, 1000);
 
+        // Revelado al hacer scroll
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
         }, { threshold: 0.1 });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
+        // Música
         const music = document.getElementById('bgMusic');
         const btn = document.getElementById('musicBtn');
         function toggleMusic() {
@@ -552,20 +461,20 @@
             else { music.pause(); btn.innerText = "🎵"; }
         }
 
+        // Fondo de Partículas
         const canvas = document.getElementById('stone-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
         function initStone() {
             canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-            particles = Array.from({length: 40}, () => ({
+            particles = Array.from({length: 30}, () => ({
                 x: Math.random() * canvas.width, y: Math.random() * canvas.height,
-                r: Math.random() * 5 + 3, 
-                d: Math.random() * 0.7 + 0.3
+                r: Math.random() * 4 + 2, d: Math.random() * 0.5 + 0.2
             }));
         }
         function drawStone() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = "rgba(255, 183, 77, 0.4)"; 
+            ctx.fillStyle = "rgba(255, 183, 77, 0.3)"; 
             ctx.beginPath();
             for(let p of particles) {
                 ctx.moveTo(p.x, p.y); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2, true);
@@ -576,20 +485,21 @@
         window.addEventListener('resize', initStone);
         initStone(); drawStone();
 
+        // Galería Lógica
         const photos = [
             {src: 'principal.jpg', label: '¡Yabba Dabba Doo!', phrase: '¡Bienvenidos a mi fiesta!'},
             {src: '0 5 dias.jfif', label: '5 Días', phrase: '¡Recién llegada de la cigüeña de Piedradura!'}, 
             {src: '1 mes.jfif', label: 'MES 1', phrase: 'Un mes haciendo historia en nuestro hogar.'},
             {src: '2 meses.jfif', label: 'MES 2', phrase: '¡Puro carisma de la Edad de Piedra!'},
-            {src: '3 meses.jfif', label: 'MES 3', phrase: '¡Yabba Dabba Doo! Tres meses de pura ternura.'},
+            {src: '3 meses.jfif', label: 'MES 3', phrase: 'Tres meses de pura ternura.'},
             {src: '4 meses.jfif', label: 'MES 4', phrase: 'Creciendo tan fuerte como una pequeña Pebbles.'},
-            {src: '5 meses.jfif', label: 'MES 5', phrase: 'Cinco meses coleccionando sonrisas prehistóricas.'},
-            {src: '6 meses.jfif', label: 'MES 6', phrase: '¡Medio añito! La princesa de nuestra Edad de Piedra.'},
-            {src: '7 meses.jfif', label: 'MES 7', phrase: 'Siete meses dejando huellas gigantes en nuestro corazón.'},
-            {src: '8 meses.jfif', label: 'MES 8', phrase: 'Ocho meses de pura magia y travesuras.'},
-            {src: '9 meses.jfif', label: 'MES 9', phrase: '¡Nuestra Pebbles favorita está creciendo muy rápido!'},
-            {src: '10 meses.jfif', label: 'MES 10', phrase: 'Afilando los dientes para el primer pastel.'},
-            {src: '11 meses.jfif', label: 'MES 11', phrase: '¡Cuenta regresiva para el Yabba Dabba Cumple!'}
+            {src: '5 meses.jfif', label: 'MES 5', phrase: 'Cinco meses coleccionando sonrisas.'},
+            {src: '6 meses.jfif', label: 'MES 6', phrase: '¡Medio añito! La princesa de la casa.'},
+            {src: '7 meses.jfif', label: 'MES 7', phrase: 'Siete meses dejando huellas gigantes.'},
+            {src: '8 meses.jfif', label: 'MES 8', phrase: 'Ocho meses de pura magia.'},
+            {src: '9 meses.jfif', label: 'MES 9', phrase: '¡Nuestra Pebbles favorita está creciendo!'},
+            {src: '10 meses.jfif', label: 'MES 10', phrase: 'Afilando los dientes para el pastel.'},
+            {src: '11 meses.jfif', label: 'MES 11', phrase: '¡Cuenta regresiva para el cumple!'}
         ];
         
         let idx = 0;
@@ -598,7 +508,6 @@
             const img = document.getElementById('gallery-img');
             const label = document.getElementById('gallery-label');
             const phrase = document.getElementById('gallery-phrase');
-            
             img.style.opacity = 0;
             setTimeout(() => {
                 img.src = photos[idx].src;
