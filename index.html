@@ -215,12 +215,58 @@
             align-items: center;
         }
 
+        /* --- ESTILO DE LA VELA MEJORADO --- */
+        .number-col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        .candle-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
         .big-number {
             font-family: 'Luckiest Guy', cursive;
             font-size: 8rem;
             line-height: 1;
             color: var(--stone-orange);
             margin: 0;
+            position: relative;
+            text-shadow: 3px 3px 0px rgba(0,0,0,0.1);
+        }
+
+        /* La llama de la vela */
+        .flame {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 35px;
+            background: #ff9800;
+            border-radius: 50% 50% 20% 20% / 70% 70% 30% 30%;
+            box-shadow: 0 0 15px #ffeb3b, 0 0 25px #ff9800;
+            animation: flicker 0.1s infinite alternate;
+        }
+
+        .flame::after {
+            content: "";
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 18px;
+            background: #ffeb3b;
+            border-radius: 50%;
+        }
+
+        @keyframes flicker {
+            0% { transform: translateX(-50%) scale(1); opacity: 0.9; }
+            100% { transform: translateX(-52%) scale(1.1); opacity: 1; }
         }
 
         .number-sub {
@@ -230,7 +276,7 @@
             color: #6d4c41;
             text-transform: uppercase;
             letter-spacing: 2px;
-            margin-top: -10px;
+            margin-top: 5px;
             display: block;
         }
 
@@ -319,7 +365,18 @@
             background: #eee;
         }
 
-        .photo-frame img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.8s; }
+        .photo-frame img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            transition: opacity 0.8s; 
+        }
+
+        /* NUEVA CLASE PARA ARREGLAR LAS FOTOS RECORTADAS */
+        .photo-frame img.ajustar-rostro {
+            object-fit: contain; /* Muestra la imagen completa sin recortar */
+            background-color: #ffffff; /* Añade fondo blanco para rellenar */
+        }
 
         .photo-caption {
             position: absolute; bottom: 0; width: 100%;
@@ -437,7 +494,10 @@
             </div>
             <div class="magic-grid">
                 <div class="number-col">
-                    <p class="big-number">1</p>
+                    <div class="candle-wrapper">
+                        <div class="flame"></div>
+                        <p class="big-number">1</p>
+                    </div>
                     <span class="number-sub">Añito</span>
                 </div>
                 <div class="text-col">
@@ -602,20 +662,21 @@
         window.addEventListener('resize', initStone);
         initStone(); drawStone();
 
+        // HE AÑADIDO UNA PROPIEDAD 'fixRostro' A LAS FOTOS QUE NECESITAN AJUSTE
         const photos = [
-            {src: 'principal.jpg', label: '¡Yabba Dabba Doo!', phrase: '¡Bienvenidos a mi fiesta!'},
-            {src: '0 5 dias.jfif', label: '5 Días', phrase: '¡Recién llegada de la cigüeña de Piedradura!'}, 
-            {src: '1 mes.jfif', label: 'MES 1', phrase: 'Un mes haciendo historia en nuestro hogar.'},
-            {src: '2 meses.jfif', label: 'MES 2', phrase: '¡Puro carisma de la Edad de Piedra!'},
-            {src: '3 meses.jfif', label: 'MES 3', phrase: '¡Yabba Dabba Doo! Tres meses de pura ternura.'},
-            {src: '4 meses.jfif', label: 'MES 4', phrase: 'Creciendo tan fuerte como una pequeña Pebbles.'},
-            {src: '5 meses.jfif', label: 'MES 5', phrase: 'Cinco meses coleccionando sonrisas prehistóricas.'},
-            {src: '6 meses.jfif', label: 'MES 6', phrase: '¡Medio añito! La princesa de nuestra Edad de Piedra.'},
-            {src: '7 meses.jfif', label: 'MES 7', phrase: 'Siete meses dejando huellas gigantes en nuestro corazón.'},
-            {src: '8 meses.jfif', label: 'MES 8', phrase: 'Ocho meses de pura magia y travesuras.'},
-            {src: '9 meses.jfif', label: 'MES 9', phrase: '¡Nuestra Pebbles favorita está creciendo muy rápido!'},
-            {src: '10 meses.jfif', label: 'MES 10', phrase: 'Afilando los dientes para el primer pastel.'},
-            {src: '11 meses.jfif', label: 'MES 11', phrase: '¡Cuenta regresiva para el Yabba Dabba Cumple!'}
+            {src: 'principal.jpg', label: '¡Yabba Dabba Doo!', phrase: '¡Bienvenidos a mi fiesta!', fixRostro: false},
+            {src: '0 5 dias.jfif', label: '5 Días', phrase: '¡Recién llegada de la cigüeña de Piedradura!', fixRostro: true}, 
+            {src: '1 mes.jfif', label: 'MES 1', phrase: 'Un mes haciendo historia en nuestro hogar.', fixRostro: false},
+            {src: '2 meses.jfif', label: 'MES 2', phrase: '¡Puro carisma de la Edad de Piedra!', fixRostro: false},
+            {src: '3 meses.jfif', label: 'MES 3', phrase: '¡Yabba Dabba Doo! Tres meses de pura ternura.', fixRostro: false},
+            {src: '4 meses.jfif', label: 'MES 4', phrase: 'Creciendo tan fuerte como una pequeña Pebbles.', fixRostro: false},
+            {src: '5 meses.jfif', label: 'MES 5', phrase: 'Cinco meses coleccionando sonrisas prehistóricas.', fixRostro: false},
+            {src: '6 meses.jfif', label: 'MES 6', phrase: '¡Medio añito! La princesa de nuestra Edad de Piedra.', fixRostro: false},
+            {src: '7 meses.jfif', label: 'MES 7', phrase: 'Siete meses dejando huellas gigantes en nuestro corazón.', fixRostro: true},
+            {src: '8 meses.jfif', label: 'MES 8', phrase: 'Ocho meses de pura magia y travesuras.', fixRostro: false},
+            {src: '9 meses.jfif', label: 'MES 9', phrase: '¡Nuestra Pebbles favorita está creciendo muy rápido!', fixRostro: false},
+            {src: '10 meses.jfif', label: 'MES 10', phrase: 'Afilando los dientes para el primer pastel.', fixRostro: false},
+            {src: '11 meses.jfif', label: 'MES 11', phrase: '¡Cuenta regresiva para el Yabba Dabba Cumple!', fixRostro: false}
         ];
         
         let idx = 0;
@@ -630,6 +691,14 @@
                 img.src = photos[idx].src;
                 label.innerText = photos[idx].label;
                 phrase.innerText = photos[idx].phrase;
+
+                // LÓGICA PARA APLICAR O QUITAR LA CLASE DE AJUSTE
+                if (photos[idx].fixRostro) {
+                    img.classList.add('ajustar-rostro');
+                } else {
+                    img.classList.remove('ajustar-rostro');
+                }
+
                 img.style.opacity = 1;
             }, 800);
         }, 4000);
