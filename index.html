@@ -21,12 +21,19 @@
             overflow-x: hidden;
             color: var(--prehistoric-brown);
             scroll-behavior: smooth;
-            /* MODIFICACIÓN: Imagen de fondo estática */
+            /* Imagen de fondo por defecto (horizontal/PC) */
             background-image: url('principal.jpg');
             background-attachment: fixed;
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
+        }
+
+        /* MODIFICACIÓN: Imagen de fondo cuando la pantalla está en vertical */
+        @media (orientation: portrait) {
+            body, html {
+                background-image: url('vertical.jpg');
+            }
         }
 
         /* Capa de oscurecimiento opcional para mejorar legibilidad del texto sobre la imagen */
