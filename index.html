@@ -299,11 +299,17 @@
         }
 
         .photo-frame {
-            width: 100%; height: 380px; margin: 20px 0;
-            border: 10px solid #d7ccc8; border-radius: 20px;
-            position: relative; overflow: hidden;
+            width: 100%; 
+            max-width: 380px; /* Asegura un tope de ancho */
+            height: 380px; 
+            margin: 20px auto; /* CAMBIO: Centrado automático horizontal */
+            border: 10px solid #d7ccc8; 
+            border-radius: 20px;
+            position: relative; 
+            overflow: hidden;
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
             background: #eee;
+            box-sizing: border-box; /* Asegura que el borde no empuje hacia afuera */
         }
 
         .photo-frame img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.8s; }
@@ -504,9 +510,16 @@
         </section>
 
         <section class="reveal" style="margin-bottom: 50px;">
+            <a href="https://wa.me/593994121550?text=¡Yabba Dabba Doo! Confirmo mi asistencia al cumple de Saori" 
+               class="btn-confirm" onclick="playMagic()">
+                CONFIRMAR ASISTENCIA A LA MADRE
+            </a>
+        </section>
+
+	<section class="reveal" style="margin-bottom: 50px;">
             <a href="https://wa.me/593967220855?text=¡Yabba Dabba Doo! Confirmo mi asistencia al cumple de Saori" 
                class="btn-confirm" onclick="playMagic()">
-                CONFIRMAR ASISTENCIA
+                CONFIRMAR ASISTENCIA AL PADRE
             </a>
         </section>
     </div>
