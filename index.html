@@ -334,15 +334,25 @@
             display: block;
         }
 
+        /* ESTILOS DE BOTONES MODIFICADOS */
         .btn-maps {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            background: var(--prehistoric-brown); color: white;
-            padding: 12px 25px; border-radius: 15px; text-decoration: none;
-            font-weight: bold; margin-bottom: 20px; font-size: 0.85rem;
-            width: 100%; box-sizing: border-box;
+            background: #5d4037; /* Café un poco más oscuro para contraste */
+            color: #ffffff;
+            padding: 18px 25px; 
+            border-radius: 15px; 
+            text-decoration: none;
+            margin-bottom: 20px; 
+            font-size: 1rem;
+            width: 100%; 
+            box-sizing: border-box;
             font-family: 'Luckiest Guy';
+            letter-spacing: 1px;
+            border: 2px solid #3e2723;
+            box-shadow: 0 6px 0px #3e2723;
+            transition: all 0.2s;
         }
 
         .info-grid {
@@ -357,15 +367,27 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: var(--stone-orange); color: white;
-            text-decoration: none; padding: 18px; border-radius: 15px;
-            font-weight: bold; letter-spacing: 1px; 
-            box-shadow: 0 6px 0px var(--prehistoric-brown);
-            text-align: center; width: 100%; box-sizing: border-box;
-            font-family: 'Luckiest Guy'; font-size: 1.2rem;
+            background: #ff9800; /* Naranja más vibrante */
+            color: #3e2723; /* Texto café oscuro para lectura máxima */
+            text-decoration: none; 
+            padding: 20px; 
+            border-radius: 20px;
+            font-weight: bold; 
+            letter-spacing: 1px; 
+            box-shadow: 0 6px 0px #bf360c;
+            text-align: center; 
+            width: 100%; 
+            box-sizing: border-box;
+            font-family: 'Luckiest Guy'; 
+            font-size: 1.2rem;
+            border: 2px solid #e65100;
+            transition: all 0.2s;
         }
 
-        .btn-confirm:active { transform: translateY(4px); box-shadow: 0 2px 0px var(--prehistoric-brown); }
+        .btn-confirm:active, .btn-maps:active { 
+            transform: translateY(4px); 
+            box-shadow: 0 2px 0px #3e2723; 
+        }
 
         .controls { position: fixed; bottom: 20px; right: 20px; display: flex; flex-direction: column; gap: 10px; z-index: 1000; }
         .float-btn {
@@ -494,7 +516,6 @@
                 <div class="info-item"><span>🕒</span> <div><strong>Hora:</strong> 14:00 hrs</div></div>
             </div>
 
-            <!-- CONTADOR MOVIDO AQUÍ -->
             <div class="countdown-container" id="countdown">
                 <div class="countdown-box"><span id="days">00</span><small>Días</small></div>
                 <div class="countdown-box"><span id="hours">00</span><small>Horas</small></div>
@@ -516,7 +537,7 @@
 
         <section class="reveal" style="margin-bottom: 50px;">
             <a href="https://wa.me/593967220855?text=¡Yabba Dabba Doo! Confirmo mi asistencia al cumple de Saori en Piedradura, iré en mi troncomóvil." 
-               class="btn-confirm" onclick="playMagic()" style="background-color: #81d4fa; box-shadow: 0 6px 0px #0288d1;">
+               class="btn-confirm" onclick="playMagic()" style="background-color: #03a9f4; box-shadow: 0 6px 0px #01579b; color: white; border-color: #0288d1;">
                 CONFIRMAR ASISTENCIA AL PADRE
             </a>
         </section>
