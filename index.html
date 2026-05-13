@@ -25,7 +25,6 @@
             overflow-x: hidden;
             color: var(--prehistoric-brown);
             scroll-behavior: smooth;
-            /* Imagen de fondo por defecto (horizontal/PC) */
             background-image: url('principal.jpg');
             background-attachment: fixed;
             background-position: center;
@@ -33,24 +32,21 @@
             background-size: cover;
         }
 
-        /* MODIFICACIÓN: Imagen de fondo cuando la pantalla está en vertical */
         @media (orientation: portrait) {
             body, html {
                 background-image: url('vertical.jpg');
             }
         }
 
-        /* Capa de oscurecimiento opcional para mejorar legibilidad del texto sobre la imagen */
         body::before {
             content: "";
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background: rgba(255, 255, 255, 0.2); /* Ajusta el 0.2 si quieres que se vea más o menos clara la imagen */
+            background: rgba(255, 255, 255, 0.2);
             z-index: -2;
         }
 
-        /* MODIFICACIÓN: z-index ajustado para estar detrás del contenido pero sobre el fondo */
         #stone-canvas {
             position: fixed; 
             top: 0; 
@@ -91,7 +87,6 @@
             box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.2);
         }
 
-        /* --- SECCIÓN: REGLAS DE PIEDRADURA --- */
         .rules-section {
             text-align: left;
             padding: 20px 25px;
@@ -137,7 +132,6 @@
             flex-shrink: 0;
         }
 
-        /* --- SECCIÓN ¿QUÉ HABRÁ EN LA FIESTA? --- */
         .party-features {
             text-align: center;
             margin-top: 20px;
@@ -186,7 +180,6 @@
             margin: 0;
         }
 
-        /* --- ESTILOS MAGIA --- */
         .magic-section {
             text-align: left;
             padding: 20px 25px;
@@ -271,7 +264,7 @@
 
         /* CONTADOR */
         .countdown-container {
-            display: flex; justify-content: center; gap: 8px; margin-top: 25px;
+            display: flex; justify-content: center; gap: 8px; margin-top: 25px; margin-bottom: 25px;
         }
         .countdown-box {
             background: #fdfdfd;
@@ -409,12 +402,6 @@
             <p style="font-size: 0.9rem; line-height: 1.6; font-weight: 600;">
                 "¡Nuestra pequeña Pebbles cumple su primer añito! Acompáñanos a celebrar en una fiesta de la edad de piedra que será histórica."
             </p>
-            <div class="countdown-container" id="countdown">
-                <div class="countdown-box"><span id="days">00</span><small>Días</small></div>
-                <div class="countdown-box"><span id="hours">00</span><small>Horas</small></div>
-                <div class="countdown-box"><span id="minutes">00</span><small>Min</small></div>
-                <div class="countdown-box"><span id="seconds">00</span><small>Seg</small></div>
-            </div>
         </section>
 
         <section class="reveal magic-section">
@@ -506,6 +493,15 @@
                 <div class="info-item"><span>📅</span> <div><strong>Fecha:</strong> 13 de Junio de 2026</div></div>
                 <div class="info-item"><span>🕒</span> <div><strong>Hora:</strong> 14:00 hrs</div></div>
             </div>
+
+            <!-- CONTADOR MOVIDO AQUÍ -->
+            <div class="countdown-container" id="countdown">
+                <div class="countdown-box"><span id="days">00</span><small>Días</small></div>
+                <div class="countdown-box"><span id="hours">00</span><small>Horas</small></div>
+                <div class="countdown-box"><span id="minutes">00</span><small>Min</small></div>
+                <div class="countdown-box"><span id="seconds">00</span><small>Seg</small></div>
+            </div>
+
             <a href="https://www.google.com/maps?q=Hotel+Las+Redes+Playas" target="_blank" class="btn-maps" onclick="playMagic()">
                 📍 ABRIR EN EL TRONCOMÓVIL
             </a>        
@@ -532,7 +528,7 @@
             sfx.currentTime = 0; sfx.play();
         }
 
-        const eventDate = new Date('June 13, 2026 15:00:00').getTime();
+        const eventDate = new Date('June 13, 2026 14:00:00').getTime();
         setInterval(() => {
             const now = new Date().getTime();
             const diff = eventDate - now;
