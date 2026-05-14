@@ -249,43 +249,14 @@
         }
 
         .big-number {
-            font-family: 'Luckiest Guy', cursive;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
             font-size: 8rem;
             line-height: 1;
             color: var(--stone-orange);
             margin: 0;
             position: relative;
             text-shadow: 3px 3px 0px rgba(0,0,0,0.1);
-        }
-
-        .flame {
-            position: absolute;
-            top: -25px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 20px;
-            height: 35px;
-            background: #ff9800;
-            border-radius: 50% 50% 20% 20% / 70% 70% 30% 30%;
-            box-shadow: 0 0 15px #ffeb3b, 0 0 25px #ff9800;
-            animation: flicker 0.1s infinite alternate;
-        }
-
-        .flame::after {
-            content: "";
-            position: absolute;
-            bottom: 5px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 10px;
-            height: 18px;
-            background: #ffeb3b;
-            border-radius: 50%;
-        }
-
-        @keyframes flicker {
-            0% { transform: translateX(-50%) scale(1); opacity: 0.9; }
-            100% { transform: translateX(-52%) scale(1.1); opacity: 1; }
         }
 
         .number-sub {
@@ -512,7 +483,6 @@
             <div class="magic-grid">
                 <div class="number-col">
                     <div class="candle-wrapper">
-                        <div class="flame"></div>
                         <p class="big-number">1</p>
                     </div>
                     <span class="number-sub">Añito</span>
