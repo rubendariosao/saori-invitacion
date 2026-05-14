@@ -12,11 +12,11 @@
     <meta property="og:image:type" content="image/jpeg">
     <meta property="og:url" content="https://rubendariosao.github.io/saori-invitacion/">
     <meta property="og:type" content="website">
-
+	
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
 
     <style>
-        /* RESET UNIVERSAL AÑADIDO */
+        /* RESET UNIVERSAL */
         * {
             margin: 0;
             padding: 0;
@@ -38,26 +38,40 @@
             overflow-x: hidden;
             color: var(--prehistoric-brown);
             scroll-behavior: smooth;
+            min-height: 100%;
+        }
+
+        /* SOLUCIÓN PARA FONDO ESTÁTICO EN SAFARI */
+        body::before {
+            content: "";
+            position: fixed; /* Mantiene el fondo quieto */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2; /* Detrás de todo */
             background-image: url('principal.jpg');
-            background-attachment: fixed;
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
         }
 
+        /* CAMBIO DE IMAGEN SEGÚN ORIENTACIÓN (Móvil/Vertical) */
         @media (orientation: portrait) {
-            body, html {
+            body::before {
                 background-image: url('vertical.jpg');
             }
         }
 
-        body::before {
+        /* Capa de aclarado sobre el fondo */
+        body::after {
             content: "";
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
             background: rgba(255, 255, 255, 0.2);
-            z-index: -2;
+            z-index: -1;
+            pointer-events: none;
         }
 
         #stone-canvas {
@@ -222,7 +236,6 @@
             align-items: center;
         }
 
-        /* --- ESTILO DE LA VELA MEJORADO --- */
         .number-col {
             display: flex;
             flex-direction: column;
@@ -245,7 +258,6 @@
             text-shadow: 3px 3px 0px rgba(0,0,0,0.1);
         }
 
-        /* La llama de la vela */
         .flame {
             position: absolute;
             top: -25px;
@@ -321,7 +333,6 @@
             display: block;
         }
 
-        /* CONTADOR */
         .countdown-container {
             display: flex; justify-content: center; gap: 8px; margin-top: 25px; margin-bottom: 25px;
         }
@@ -379,10 +390,9 @@
             transition: opacity 0.8s; 
         }
 
-        /* NUEVA CLASE PARA ARREGLAR LAS FOTOS RECORTADAS */
         .photo-frame img.ajustar-rostro {
-            object-fit: contain; /* Muestra la imagen completa sin recortar */
-            background-color: #ffffff; /* Añade fondo blanco para rellenar */
+            object-fit: contain; 
+            background-color: #ffffff; 
         }
 
         .photo-caption {
@@ -522,7 +532,7 @@
                 <img id="gallery-img" src="principal.jpg">
                 <div class="photo-caption">
                     <span class="caption-title" id="gallery-label">Llegada de la DinoSaori</span>
-                    <span class="caption-text" id="gallery-phrase">Llegaste a iluminar nuestro mundo.</span>
+                    <span class="caption-text" id="gallery-phrase">Llegaste a iluminar nuestro world.</span>
                 </div>
             </div>
         </section>
@@ -596,7 +606,7 @@
             </div>
 
             <a href="https://maps.google.com/?q=-2.640286,-80.387245" target="_blank" class="btn-maps" onclick="playMagic()">
-                📍 ABRIR EN EL TRONCOMÓVIL
+                📍 ABRIR UBICACIÓN EN EL TRONCOMÓVIL
             </a>        
         </section>
 
@@ -669,7 +679,6 @@
         window.addEventListener('resize', initStone);
         initStone(); drawStone();
 
-        // HE AÑADIDO UNA PROPIEDAD 'fixRostro' A LAS FOTOS QUE NECESITAN AJUSTE
         const photos = [
             {src: 'principal.jpg', label: '¡Yabba Dabba Doo!', phrase: '¡Bienvenidos a mi fiesta!', fixRostro: false},
             {src: '0 5 dias.jfif', label: '5 Días', phrase: '¡Recién llegada de la cigüeña de Piedradura!', fixRostro: true}, 
@@ -699,7 +708,6 @@
                 label.innerText = photos[idx].label;
                 phrase.innerText = photos[idx].phrase;
 
-                // LÓGICA PARA APLICAR O QUITAR LA CLASE DE AJUSTE
                 if (photos[idx].fixRostro) {
                     img.classList.add('ajustar-rostro');
                 } else {
