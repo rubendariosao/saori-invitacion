@@ -14,6 +14,8 @@
     <meta property="og:type" content="website">
 	
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <!-- Carga de Iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         /* RESET UNIVERSAL */
@@ -405,6 +407,12 @@
             transition: all 0.2s;
         }
 
+        .btn-maps i {
+            margin-right: 12px;
+            font-size: 1.2rem;
+            color: var(--stone-orange);
+        }
+
         .info-grid {
             text-align: left; background: #fff8e1; border-radius: 20px;
             padding: 20px; margin-bottom: 20px; border: 2px dashed var(--stone-orange);
@@ -432,6 +440,11 @@
             font-size: 1.2rem;
             border: 2px solid #e65100;
             transition: all 0.2s;
+        }
+
+        .btn-confirm i {
+            margin-right: 12px;
+            font-size: 1.4rem;
         }
 
         .btn-confirm:active, .btn-maps:active { 
@@ -576,21 +589,21 @@
             </div>
 
             <a href="https://maps.google.com/?q=-2.640286,-80.387245" target="_blank" class="btn-maps" onclick="playMagic()">
-                📍 ABRIR UBICACIÓN EN EL TRONCOMÓVIL
+                <i class="fa-solid fa-map-location-dot"></i> ABRIR UBICACIÓN EN EL TRONCOMÓVIL
             </a>        
         </section>
 
         <section class="reveal" style="margin-bottom: 20px;">
             <a href="https://wa.me/593994121550?text=¡Yabba Dabba Doo! Confirmo mi asistencia al cumple de Saori en Piedradura, iré en mi troncomóvil." 
                class="btn-confirm" onclick="playMagic()">
-                Confirmar asistecia a Jackira
+                <i class="fa-brands fa-whatsapp"></i> Confirmar asistencia a Jackira
             </a>
         </section>
 
         <section class="reveal" style="margin-bottom: 50px;">
             <a href="https://wa.me/593967220855?text=¡Yabba Dabba Doo! Confirmo mi asistencia al cumple de Saori en Piedradura, iré en mi troncomóvil." 
                class="btn-confirm" onclick="playMagic()" style="background-color: #03a9f4; box-shadow: 0 6px 0px #01579b; color: white; border-color: #0288d1;">
-                Confirmar asistecia a Rubén
+                <i class="fa-brands fa-whatsapp"></i> Confirmar asistencia a Rubén
             </a>
         </section>
     </div>
