@@ -46,26 +46,24 @@
         /* SOLUCIÓN PARA FONDO ESTÁTICO EN SAFARI */
         body::before {
             content: "";
-            position: fixed; /* Mantiene el fondo quieto */
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -2; /* Detrás de todo */
+            z-index: -2;
             background-image: url('principal.jpg');
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
         }
 
-        /* CAMBIO DE IMAGEN SEGÚN ORIENTACIÓN (Móvil/Vertical) */
         @media (orientation: portrait) {
             body::before {
                 background-image: url('vertical.jpg');
             }
         }
 
-        /* Capa de aclarado sobre el fondo */
         body::after {
             content: "";
             position: fixed;
@@ -116,6 +114,93 @@
             box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.2);
         }
 
+        /* --- CARRUSEL SIN BARRA DE SCROLL --- */
+        .photo-frame {
+            width: 100%; 
+            max-width: 380px; 
+            height: 420px; 
+            margin: 20px auto; 
+            border: 10px solid #d7ccc8; 
+            border-radius: 20px;
+            position: relative; 
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            background: #eee;
+        }
+
+        .carousel-container {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            height: 100%;
+            width: 100%;
+            /* OCULTAR BARRA EN NAVEGADORES MODERNOS */
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE y Edge */
+        }
+
+        /* OCULTAR BARRA EN CHROME, SAFARI Y OPERA */
+        .carousel-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .carousel-item {
+            flex: 0 0 100%;
+            width: 100%;
+            height: 100%;
+            scroll-snap-align: start;
+            position: relative;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .carousel-item img.ajustar-rostro {
+            object-fit: contain;
+            background-color: white;
+        }
+
+        .photo-caption {
+            position: absolute; 
+            bottom: 0; 
+            width: 100%;
+            background: rgba(121, 85, 72, 0.9);
+            color: white; 
+            padding: 15px 10px;
+            font-family: 'Montserrat', sans-serif;
+            text-align: center;
+        }
+
+        .caption-title { font-family: 'Luckiest Guy'; font-size: 1.1rem; display: block; margin-bottom: 4px; color: var(--stone-orange); }
+        .caption-text { font-size: 0.8rem; font-style: italic; display: block; opacity: 0.9; }
+        
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 183, 77, 0.7);
+            border: none;
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 5;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .prev { left: 5px; }
+        .next { right: 5px; }
+
+        /* --- RESTO DE ESTILOS --- */
         .rules-section {
             text-align: left;
             padding: 20px 25px;
@@ -343,42 +428,6 @@
             filter: drop-shadow(3px 3px 0px var(--stone-orange));
         }
 
-        .photo-frame {
-            width: 100%; 
-            max-width: 380px; 
-            height: 380px; 
-            margin: 20px auto; 
-            border: 10px solid #d7ccc8; 
-            border-radius: 20px;
-            position: relative; 
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            background: #eee;
-        }
-
-        .photo-frame img { 
-            width: 100%; 
-            height: 100%; 
-            object-fit: cover; 
-            transition: opacity 0.8s; 
-        }
-
-        .photo-frame img.ajustar-rostro {
-            object-fit: contain; 
-            background-color: #ffffff; 
-        }
-
-        .photo-caption {
-            position: absolute; bottom: 0; width: 100%;
-            background: rgba(121, 85, 72, 0.9);
-            color: white; padding: 15px 10px;
-            font-family: 'Montserrat', sans-serif;
-            box-sizing: border-box;
-        }
-
-        .caption-title { font-family: 'Luckiest Guy'; font-size: 1rem; display: block; margin-bottom: 4px; color: var(--stone-orange); }
-        .caption-text { font-size: 0.75rem; font-style: italic; display: block; opacity: 0.9; }
-
         .address-image {
             width: 100%;
             border-radius: 15px;
@@ -511,11 +560,12 @@
 
         <section class="reveal stone-card">
             <h2 style="font-family: 'Luckiest Guy'; font-size: 1.2rem; color: var(--prehistoric-brown);">ÁLBUM DE RECUERDOS</h2>
-            <div class="photo-frame" onclick="playMagic()">
-                <img id="gallery-img" src="principal.jpg">
-                <div class="photo-caption">
-                    <span class="caption-title" id="gallery-label">Llegada de la DinoSaori</span>
-                    <span class="caption-text" id="gallery-phrase">Llegaste a iluminar nuestro world.</span>
+            <div class="photo-frame">
+                <button class="nav-btn prev" onclick="moveSlide(-1)">❮</button>
+                <button class="nav-btn next" onclick="moveSlide(1)">❯</button>
+                
+                <div class="carousel-container" id="carousel">
+                    <!-- Dinámico -->
                 </div>
             </div>
         </section>
@@ -662,44 +712,66 @@
         window.addEventListener('resize', initStone);
         initStone(); drawStone();
 
+        /* --- LÓGICA DEL CARRUSEL --- */
         const photos = [
             {src: 'principal.jpg', label: '¡Yabba Dabba Doo!', phrase: '¡Bienvenidos a mi fiesta!', fixRostro: false},
-            {src: '0 5 dias.jfif', label: '5 Días', phrase: '¡Recién llegada de la cigüeña de Piedradura!', fixRostro: true}, 
-            {src: '1 mes.jfif', label: 'MES 1', phrase: 'Un mes haciendo historia en nuestro hogar.', fixRostro: false},
-            {src: '2 meses.jfif', label: 'MES 2', phrase: '¡Puro carisma de la Edad de Piedra!', fixRostro: false},
-            {src: '3 meses.jfif', label: 'MES 3', phrase: '¡Yabba Dabba Doo! Tres meses de pura ternura.', fixRostro: false},
-            {src: '4 meses.jfif', label: 'MES 4', phrase: 'Creciendo tan fuerte como una pequeña Pebbles.', fixRostro: false},
-            {src: '5 meses.jfif', label: 'MES 5', phrase: 'Cinco meses coleccionando sonrisas prehistóricas.', fixRostro: false},
-            {src: '6 meses.jfif', label: 'MES 6', phrase: '¡Medio añito! La princesa de nuestra Edad de Piedra.', fixRostro: false},
-            {src: '7 meses.jfif', label: 'MES 7', phrase: 'Siete meses dejando huellas gigantes en nuestro corazón.', fixRostro: true},
-            {src: '8 meses.jfif', label: 'MES 8', phrase: 'Ocho meses de pura magia y travesuras.', fixRostro: false},
-            {src: '9 meses.jfif', label: 'MES 9', phrase: '¡Nuestra Pebbles favorita está creciendo muy rápido!', fixRostro: false},
-            {src: '10 meses.jfif', label: 'MES 10', phrase: 'Afilando los dientes para el primer pastel.', fixRostro: false},
-            {src: '11 meses.jfif', label: 'MES 11', phrase: '¡Cuenta regresiva para el Yabba Dabba Cumple!', fixRostro: false}
+            {src: '0 5 dias.jfif', label: '5 Días', phrase: '¡Recién llegada de la cigüeña!', fixRostro: true}, 
+            {src: '1 mes.jfif', label: 'MES 1', phrase: 'Un mes haciendo historia.', fixRostro: false},
+            {src: '2 meses.jfif', label: 'MES 2', phrase: '¡Puro carisma prehistórico!', fixRostro: false},
+            {src: '3 meses.jfif', label: 'MES 3', phrase: 'Tres meses de pura ternura.', fixRostro: false},
+            {src: '4 meses.jfif', label: 'MES 4', phrase: 'Creciendo como una pequeña Pebbles.', fixRostro: false},
+            {src: '5 meses.jfif', label: 'MES 5', phrase: 'Coleccionando sonrisas.', fixRostro: false},
+            {src: '6 meses.jfif', label: 'MES 6', phrase: '¡Medio añito ya!', fixRostro: false},
+            {src: '7 meses.jfif', label: 'MES 7', phrase: 'Dejando huellas en el corazón.', fixRostro: true},
+            {src: '8 meses.jfif', label: 'MES 8', phrase: 'Ocho meses de pura magia.', fixRostro: false},
+            {src: '9 meses.jfif', label: 'MES 9', phrase: '¡Nuestra Pebbles favorita!', fixRostro: false},
+            {src: '10 meses.jfif', label: 'MES 10', phrase: 'Afilando los dientes para el pastel.', fixRostro: false},
+            {src: '11 meses.jfif', label: 'MES 11', phrase: '¡Cuenta regresiva para el cumple!', fixRostro: false}
         ];
+
+        const carousel = document.getElementById('carousel');
         
-        let idx = 0;
-        setInterval(() => {
-            idx = (idx + 1) % photos.length;
-            const img = document.getElementById('gallery-img');
-            const label = document.getElementById('gallery-label');
-            const phrase = document.getElementById('gallery-phrase');
-            
-            img.style.opacity = 0;
-            setTimeout(() => {
-                img.src = photos[idx].src;
-                label.innerText = photos[idx].label;
-                phrase.innerText = photos[idx].phrase;
+        photos.forEach(photo => {
+            const item = document.createElement('div');
+            item.className = 'carousel-item';
+            item.innerHTML = `
+                <img src="${photo.src}" class="${photo.fixRostro ? 'ajustar-rostro' : ''}" loading="lazy">
+                <div class="photo-caption">
+                    <span class="caption-title">${photo.label}</span>
+                    <span class="caption-text">${photo.phrase}</span>
+                </div>
+            `;
+            carousel.appendChild(item);
+        });
 
-                if (photos[idx].fixRostro) {
-                    img.classList.add('ajustar-rostro');
-                } else {
-                    img.classList.remove('ajustar-rostro');
-                }
+        function moveSlide(direction) {
+            const scrollAmount = carousel.clientWidth;
+            carousel.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+            resetAutoPlay();
+        }
 
-                img.style.opacity = 1;
-            }, 800);
+        let autoPlayInterval = setInterval(() => {
+            if (carousel.scrollLeft + carousel.clientWidth >= carousel.scrollWidth - 10) {
+                carousel.scrollTo({ left: 0, behavior: 'smooth' });
+            } else {
+                carousel.scrollBy({ left: carousel.clientWidth, behavior: 'smooth' });
+            }
         }, 4000);
+
+        function resetAutoPlay() {
+            clearInterval(autoPlayInterval);
+            autoPlayInterval = setInterval(() => {
+                if (carousel.scrollLeft + carousel.clientWidth >= carousel.scrollWidth - 10) {
+                    carousel.scrollTo({ left: 0, behavior: 'smooth' });
+                } else {
+                    carousel.scrollBy({ left: carousel.clientWidth, behavior: 'smooth' });
+                }
+            }, 5000);
+        }
+
+        carousel.addEventListener('touchstart', () => clearInterval(autoPlayInterval));
+        carousel.addEventListener('touchend', resetAutoPlay);
+
     </script>
 </body>
 </html>
