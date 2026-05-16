@@ -529,15 +529,15 @@
 
     <canvas id="stone-canvas"></canvas>
 
-    <audio id="bgMusic" loop>
-        <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_82377c8052.mp3" type="audio/mpeg">
+    <audio id="bgMusic" loop autoplay>
+        <source src="musica.mp3" type="audio/mpeg">
     </audio>
     <audio id="magicSfx">
         <source src="https://assets.mixkit.co/active_storage/sfx/2014/2014-preview.mp3" type="audio/mpeg">
     </audio>
 
     <div class="controls">
-        <button class="float-btn" onclick="toggleMusic()" id="musicBtn">🎵</button>
+        <button class="float-btn" onclick="toggleMusic()" id="musicBtn">🔇</button>
     </div>
 
     <div class="container">
@@ -701,6 +701,19 @@
             if (music.paused) { music.play(); btn.innerText = "🔇"; }
             else { music.pause(); btn.innerText = "🎵"; }
         }
+
+        // Intento de autoreproducción al interactuar con la pantalla (Cubre restricciones del navegador)
+        window.addEventListener('click', () => {
+            if (music.paused && btn.innerText === "🔇") {
+                music.play().catch(e => console.log("Reproducción automática prevenida"));
+            }
+        }, { once: true });
+
+        window.addEventListener('touchstart', () => {
+            if (music.paused && btn.innerText === "🔇") {
+                music.play().catch(e => console.log("Reproducción automática prevenida"));
+            }
+        }, { once: true });
 
         const canvas = document.getElementById('stone-canvas');
         const ctx = canvas.getContext('2d');
