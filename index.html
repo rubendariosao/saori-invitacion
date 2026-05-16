@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Saori - Mi Primer Añito</title>
     
-    <!-- Metaetiquetas para compartir en WhatsApp/Redes Sociales -->
     <meta property="og:title" content="¡El Primer Añito de Saori!">
     <meta property="og:description" content="Acompáñanos a una fiesta histórica en Piedradura. ¡Yabba Dabba Doo!">
 	<meta property="og:image" content="https://rubendariosao.github.io/saori-invitacion/principal.jpg">
@@ -14,7 +13,6 @@
     <meta property="og:type" content="website">
 	
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
-    <!-- Carga de Iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
@@ -179,7 +177,7 @@
 
         .caption-title { font-family: 'Luckiest Guy'; font-size: 1.1rem; display: block; margin-bottom: 4px; color: var(--stone-orange); }
         .caption-text { font-size: 0.8rem; font-style: italic; display: block; opacity: 0.9; }
-        
+         
         .nav-btn {
             position: absolute;
             top: 50%;
@@ -382,13 +380,30 @@
         }
 
         .event-label {
-            font-family: 'Luckiest Guy', cursive;
+            font-family: 'Luckiest Guy', cursive, sans-serif;
             letter-spacing: 2px; 
             font-size: 1.6rem; 
             color: var(--stone-orange);
             text-shadow: 2px 2px 0px var(--prehistoric-brown);
             text-transform: uppercase;
             display: block;
+        }
+
+        /* CAMBIO EXCLUSIVO PARA ARREGLAR VISUALIZACIÓN EN SAFARI */
+        .safari-font-fix {
+            font-family: 'Luckiest Guy', Impact, 'Arial Black', sans-serif !important;
+            font-weight: normal !important;
+            font-size: 2.2rem;
+            color: #ff9800;
+            text-shadow: 
+                -2px -2px 0 #795548,  
+                 2px -2px 0 #795548,
+                -2px  2px 0 #795548,
+                 2px  2px 0 #795548,
+                 4px  4px 0px rgba(0,0,0,0.15);
+            letter-spacing: 3px;
+            display: inline-block;
+            transform: rotate(-2deg);
         }
 
         .countdown-container {
@@ -530,7 +545,7 @@
         <section class="reveal stone-card" style="margin-top: 30px;">
             <span style="font-size: 2.5rem;">🦖</span>
             <div class="title-wrapper">
-                <span class="event-label">¡YABBA DABBA DOO!</span>
+                <span class="event-label safari-font-fix">¡YABBA DABBA DOO!</span>
             </div>
             <h1>Saori</h1>
             <p style="font-size: 0.9rem; line-height: 1.6; font-weight: 600;">
@@ -565,8 +580,7 @@
                 <button class="nav-btn next" onclick="moveSlide(1)">❯</button>
                 
                 <div class="carousel-container" id="carousel">
-                    <!-- Dinámico -->
-                </div>
+                    </div>
             </div>
         </section>
 
