@@ -587,25 +587,25 @@
         <section class="reveal party-features">
             <h2>¿Qué habrá en la Dinofiesta?</h2>
             
-            <div class="feature-item">
+            <div class="reveal feature-item">
                 <span class="feature-icon">🎂</span>
                 <h3>Piedra Banquete</h3>
                 <p>Deliciosos bocadillos de la edad de piedra y un pastel volcánico.</p>
             </div>
 
-            <div class="feature-item">
+            <div class="reveal feature-item">
                 <span class="feature-icon">🦴</span>
                 <h3>Dino Juegos</h3>
                 <p>Actividades divertidas inspiradas en Pebbles y Dino.</p>
             </div>
 
-            <div class="feature-item">
+            <div class="reveal feature-item">
                 <span class="feature-icon">🎁</span>
                 <h3>Sorpresas</h3>
                 <p>Regalos y recuerdos para todos nuestros pequeños trogloditas.</p>
             </div>
 
-            <div class="feature-item">
+            <div class="reveal feature-item">
                 <span class="feature-icon">🏊‍♀️</span>
                 <h3>¡Al Agua Dino!</h3>
                 <p>No olvides traer tu traje de baño para disfrutar de un divertido y refrescante chapuzón prehistórico en la piscina.</p>
@@ -698,7 +698,13 @@
         }, 1000);
 
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+            entries.forEach(entry => { 
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active'); 
+                } else {
+                    entry.target.classList.remove('active'); 
+                }
+            });
         }, { threshold: 0.1 });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
